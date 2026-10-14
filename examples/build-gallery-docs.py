@@ -9,13 +9,14 @@ data=json.loads(args.inventory.read_text(encoding='utf-8'))
 root=args.public_root
 def table(items,kind):
     lines=['<table>']
-    for start in range(0,len(items),4):
+    for start in range(0,len(items),3):
         lines.append('<tr>')
-        for item in items[start:start+4]:
+        for item in items[start:start+3]:
             file=('material-'+item['id']+'.png') if kind=='material' else item['id']+'.gif'
             src='docs/media/gallery/'+file
-            lines.append(f'<td width="25%" align="center"><a href="{src}"><img src="{src}" width="220" alt="{item["name"]}"></a><br><strong>{item["name"]}</strong></td>')
-        for _ in range(4-len(items[start:start+4])):lines.append('<td width="25%"></td>')
+            thumb='docs/media/gallery/thumbs/'+file
+            lines.append(f'<td width="33%" align="center"><a href="{src}"><img src="{thumb}" width="200" alt="{item["name"]}"></a><br><strong>{item["name"]}</strong></td>')
+        for _ in range(3-len(items[start:start+3])):lines.append('<td width="33%"></td>')
         lines.append('</tr>')
     lines.append('</table>')
     return '\n'.join(lines)
@@ -45,10 +46,10 @@ feature='''## 先看效果
 
 <table>
 <tr>
-<td width="25%" align="center"><img src="docs/media/gallery/anvil.gif" width="220" alt="轰然坠落"><br><strong>轰然坠落</strong><br><sub>急速坠落，落点尘雾扩散</sub></td>
-<td width="25%" align="center"><img src="docs/media/gallery/number-roll.gif" width="220" alt="数值滚动"><br><strong>数值滚动</strong><br><sub>逐位滚动，停在原数值</sub></td>
-<td width="25%" align="center"><img src="docs/media/gallery/material-spectrumFrame.png" width="220" alt="幻彩霓虹"><br><strong>弥散渐变</strong><br><sub>多层色光，丰富卡片层次</sub></td>
-<td width="25%" align="center"><img src="docs/media/gallery/material-glass.png" width="220" alt="通透玻璃"><br><strong>液态玻璃</strong><br><sub>背景折射与边缘高光</sub></td>
+<td width="25%" align="center"><a href="docs/media/gallery/anvil.gif"><img src="docs/media/gallery/featured/anvil.gif" width="160" alt="轰然坠落"></a><br><strong>轰然坠落</strong><br><sub>急速坠落<br>落点尘雾扩散</sub></td>
+<td width="25%" align="center"><a href="docs/media/gallery/number-roll.gif"><img src="docs/media/gallery/featured/number-roll.gif" width="160" alt="数值滚动"></a><br><strong>数值滚动</strong><br><sub>逐位滚动<br>停在原数值</sub></td>
+<td width="25%" align="center"><a href="docs/media/gallery/material-spectrumFrame.png"><img src="docs/media/gallery/featured/material-spectrumFrame.png" width="160" alt="幻彩霓虹"></a><br><strong>弥散渐变</strong><br><sub>多层色光<br>丰富卡片层次</sub></td>
+<td width="25%" align="center"><a href="docs/media/gallery/material-glass.png"><img src="docs/media/gallery/featured/material-glass.png" width="160" alt="通透玻璃"></a><br><strong>液态玻璃</strong><br><sub>背景折射<br>柔和边缘高光</sub></td>
 </tr>
 </table>
 
@@ -60,4 +61,4 @@ new=new.replace('<a href="#先看效果">效果展示</a> ·','<a href="#动画�
 new=new.replace('## 安装与上手',gallery+'\n## 安装与上手')
 readme.write_text(new,encoding='utf-8')
 (root/'docs/GALLERY.md').write_text('# 效果画廊\n\n[返回首页](../README.md)\n\n'+gallery.replace('docs/media/','media/'),encoding='utf-8')
-print(f'Generated four-column galleries: {len(data["animations"])} animations, {len(data["materials"])} materials')
+print(f'Generated three-column galleries: {len(data["animations"])} animations, {len(data["materials"])} materials')

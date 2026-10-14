@@ -15,7 +15,7 @@
 
 ## 重新生成
 
-### 全量四列画廊
+### 全量三列画廊
 
 当前画廊覆盖 v1.0.11 的 51 款正式动画与 28 个内置形状预设。动画由 PowerPoint 原生执行后导出，使用已安装的「思源黑体 CN Bold」；预设名称按插件界面显示，玻璃背景与内置预设库一致。GitHub 正文仍使用平台字体。
 
@@ -25,12 +25,15 @@
 node examples/prepare-gallery.cjs
 powershell -NoProfile -ExecutionPolicy RemoteSigned -File examples/export-gallery.ps1
 python examples/encode-gallery.py examples/output/gallery docs/media/gallery
+python examples/build-gallery-thumbnails.py docs/media/gallery
 python examples/build-gallery-docs.py examples/output/gallery/inventory.json .
 ```
 
 `prepare-gallery.cjs` 按正式开放目录生成清单，排除待实现与已移除动画。`export-gallery.ps1` 只操作新建的自有文稿，使用原生参数和执行模块；多对象动画使用六张卡片，其他效果使用文字或单张卡片。循环 GIF 截取一个周期，其他 GIF 在播放前展示静止封面。中间 PPT、MP4 仅留在本地，不随画廊上传。
 
 `-Resume` / `--resume` 仅用于继续同一次、参数未变且已有文件确认完整的生成任务。改变字体、参数或源码后请使用新输出目录。生成后需检查 GIF 动态帧、首尾状态、文字完整性以及实际 GitHub 排版，不能只检查文件数量。
+
+画廊每行三张，顶部四个精选案例等宽。独立生成 200 × 138 的画廊缩略图及 160 × 110 的精选缩略图，点击仍可查看原图。GitHub 的 GIF 播放控件会覆盖 HTML 图片宽度，不能只修改 `width` 属性；检查时需同时测量表格自身的横向溢出、四格宽度和 GIF 播放控件下的布局。
 
 ### 较大案例的本地复现
 
