@@ -21,7 +21,7 @@ public class ShowcaseMessageFilter:IMessageFilter {
 function Color([string]$hex){$v=[Convert]::ToInt32($hex,16);return (($v -shr 16) -band 255)+($v -band 65280)+(($v -band 255) -shl 16)}
 function Text($slide,[string]$value,[single]$x,[single]$y,[single]$w,[single]$h,[single]$size,[string]$color='FFFFFF',[bool]$bold=$false){
  $s=$slide.Shapes.AddTextbox(1,$x,$y,$w,$h);$s.TextFrame.MarginLeft=0;$s.TextFrame.MarginRight=0;$s.TextFrame.MarginTop=0;$s.TextFrame.MarginBottom=0
- $s.TextFrame.TextRange.Text=$value;$s.TextFrame.TextRange.Font.Name='Microsoft YaHei';$s.TextFrame.TextRange.Font.Size=$size;$s.TextFrame.TextRange.Font.Color.RGB=(Color $color);$s.TextFrame.TextRange.Font.Bold=$(if($bold){-1}else{0});return $s
+ $s.TextFrame.TextRange.Text=$value;$s.TextFrame.TextRange.Font.Name='思源黑体 CN Regular';$s.TextFrame.TextRange.Font.Size=$size;$s.TextFrame.TextRange.Font.Color.RGB=(Color $color);$s.TextFrame.TextRange.Font.Bold=$(if($bold){-1}else{0});return $s
 }
 function Base($doc,[string]$title,[string]$subtitle){
  $s=$doc.Slides.Add($doc.Slides.Count+1,12);$s.FollowMasterBackground=0;$s.Background.Fill.Solid();$s.Background.Fill.ForeColor.RGB=(Color '151719')
@@ -44,7 +44,7 @@ try{
  if(-not $MaterialsOnly){
  $p=NewDoc $app;$owned+=,$p;$s=Base $p '轰然坠落' '急速坠落、落地震动与尘雾扩散。适合产品、章节标题与重点登场。'
  $target=$s.Shapes.AddShape(5,355,216,250,170);$target.Fill.Solid();$target.Fill.ForeColor.RGB=(Color 'FF5500');$target.Line.Visible=0
- $target.TextFrame.TextRange.Text='登场。';$target.TextFrame.TextRange.Font.Name='Microsoft YaHei';$target.TextFrame.TextRange.Font.Size=40;$target.TextFrame.TextRange.Font.Bold=-1;$target.TextFrame.TextRange.Font.Color.RGB=(Color 'FFFFFF');$target.TextFrame.VerticalAnchor=3;$target.TextFrame.TextRange.ParagraphFormat.Alignment=2
+ $target.TextFrame.TextRange.Text='登场。';$target.TextFrame.TextRange.Font.Name='思源黑体 CN Regular';$target.TextFrame.TextRange.Font.Size=40;$target.TextFrame.TextRange.Font.Bold=-1;$target.TextFrame.TextRange.Font.Color.RGB=(Color 'FFFFFF');$target.TextFrame.VerticalAnchor=3;$target.TextFrame.TextRange.ParagraphFormat.Alignment=2
  $plan=[pscustomobject]@{id='anvil';mode='element';category='entrance';duration=1.8;stagger=0;intensity=1;dust=$true}
  [void](Add-PangSelectionAnimation -Slide $s -Shapes @($target) -Plan $plan -Trigger 2 -Delay .6)
  SaveVideo $p 'anvil';$p.Close();$owned=@()
