@@ -23,3 +23,5 @@ security/private/
 features/shapes/prototype/index.html
 features/shapes/prototype/windows-preview-frame.html
 features/animations/preview/index.html
+
+examples/output/
