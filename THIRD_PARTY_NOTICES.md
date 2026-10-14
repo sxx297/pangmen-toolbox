@@ -11,6 +11,6 @@
 | Obfuscar 2.2.38 | 构建混淆 | MIT，构建工具不随运行时载荷发布 |
 | Terser 5.44.0 | JavaScript 构建 | BSD-2-Clause，依赖许可见 npm 包 |
 | javascript-obfuscator 4.1.1 | JavaScript 构建 | BSD-2-Clause，依赖许可见 npm 包 |
-| Playwright 1.55.0 | UI 测试 | Apache-2.0，测试依赖不随安装包发布 |
+| Playwright 1.55.1 | UI 测试 | Apache-2.0，测试依赖不随安装包发布 |
 
 运行素材包括品牌图形、形状面板插画，以及动画用的云雾帧/循环时序 PPTX。发布快照去除了 PPTX 的个人作者属性。系统字体仅通过字体名称调用，不随仓库分发字体文件。项目品牌图形不代表对衍生版本的官方背书。
