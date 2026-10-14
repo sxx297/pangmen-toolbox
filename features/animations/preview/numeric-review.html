@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>旁门动画库 · 数值动画对照</title><link rel="icon" href="assets/pang.svg"><link rel="stylesheet" href="numeric-motion.css"><link rel="stylesheet" href="numeric-review.css"></head>
+<body>
+<header><a href="window-preview.html?v=0.8.8"><img src="assets/pang.svg" alt="旁" width="36" height="36"><strong>旁门动画库</strong></a><span>数值动画对照</span></header>
+<main>
+ <div class="intro"><div><p class="eyebrow">NUMERIC MOTION / 01</p><h1>让数字，真正滚动起来。</h1><p>左侧原地变动，右侧上下滚动。数字各占一格，位数变化时不挤动。</p></div><button id="play" class="primary">播放对照</button></div>
+ <nav class="cases" aria-label="示例数字"><button data-case="integer" aria-pressed="true">12,860</button><button data-case="carry" aria-pressed="false">1,000</button><button data-case="percent" aria-pressed="false">98.6%</button><button data-case="negative" aria-pressed="false">−125.30</button></nav>
+ <section class="comparison">
+  <article><div class="card-title"><h2>数值变动</h2><span>COUNT</span></div><div class="stage" id="count"></div><p>保留计数感，字位和字号保持稳定。</p></article>
+  <article><div class="card-title"><h2>数值滚动</h2><span>ROLL</span></div><div class="stage" id="roll"></div><p>每位数字上下移动，逐渐减速、依次停下。</p></article>
+ </section>
+ <div class="transport"><span id="time">0.00 / 1.60 s</span><input id="timeline" type="range" min="0" max="1.6" step="0.001" value="0" aria-label="动画进度"></div>
+ <section class="ppt-review"><div><h2>在 PowerPoint 中比较</h2><p>解压后双击 PreviewNumeric.cmd，自动载入并放映。每个数字只多一个辅助对象。</p></div><a class="secondary" href="downloads/numeric-study-preview.zip" download>下载 PPT 预览包</a></section>
+ <details class="recording"><summary>查看 PPT 实际播放录像</summary><video src="downloads/numeric-study.mp4" controls preload="none" playsinline></video></details>
+ <p class="footnote">效果评审版，尚未替换安装包。PPT 预览包会先加载图片帧；直接打开 PPTX，首次播放仍可能短暂卡顿。</p>
+</main><script src="numeric-motion.js"></script><script src="numeric-review.js"></script>
+</body></html>

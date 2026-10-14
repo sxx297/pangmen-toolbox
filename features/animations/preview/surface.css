@@ -1,0 +1,82 @@
+/* The same editor is hosted in a floating window or a narrow task pane. */
+.topbar{justify-content:space-between}.transport-buttons .button{min-width:62px}
+body[data-surface]{padding:0;height:100dvh;overflow:hidden;background:var(--paper)}
+body[data-surface] .app{height:100%;max-width:none;margin:0;border:0;border-radius:0;display:flex;flex-direction:column;overflow:hidden;box-shadow:none}
+body[data-surface] .topbar,body[data-surface] .category-nav{flex:none}
+body[data-surface] .workspace{flex:1;min-height:0;overflow:auto;scrollbar-gutter:stable}
+body[data-surface] .apply-panel{flex:none;margin:0;padding:12px 18px;border-top:1px solid var(--line);background:var(--paper)}
+body[data-surface] #apply-help{display:none}
+body[data-surface] .library-foot{padding-top:12px}
+body[data-surface] .stage-state{font-size:9px}
+/* Give the floating inspector roughly one third of the panel. Its 320 px floor
+   keeps the preview useful when the window is narrow while the 2:1 tracks keep
+   the inspector below half of the available width. */
+body[data-surface=floating] .workspace{display:grid;grid-template-columns:minmax(0,2fr) minmax(320px,1fr);grid-template-rows:minmax(0,1fr);align-items:stretch;overflow:hidden}
+body[data-surface=floating] .library{display:flex;flex-direction:column;min-height:0;overflow:hidden;padding:20px;grid-row:auto;border-right:1px solid var(--line)}
+body[data-surface=floating] .library>:not(.effect-grid){flex-shrink:0}
+body[data-surface=floating] .library .section-heading{margin-bottom:12px}
+body[data-surface=floating] .library-filters{margin:10px 0}
+body[data-surface=floating] .library-foot{display:none}
+body[data-surface=floating] .effect-grid{flex:1;min-height:0;grid-template-columns:repeat(auto-fill,minmax(112px,1fr));max-height:none;gap:10px;overflow-y:scroll;scrollbar-gutter:stable}
+body[data-surface=floating] .library{--pang-thumb-size:54px}
+body[data-surface=floating] .tile-visual{height:76px}
+body[data-surface=floating] .tile-name{font-size:12px;padding:7px 9px}
+body[data-surface=floating] .preview-column{padding:0 0 20px;min-width:0}
+body[data-surface=floating] .preview-heading h2{font-size:21px}
+body[data-surface=floating] .effect-description{font-size:11px;min-height:0;margin:10px 0 24px;line-height:1.8}
+body[data-surface=floating] .inspector{display:block;grid-column:auto;padding:22px 20px;border-left:0;height:100%;min-height:0;overflow-y:auto;scrollbar-gutter:stable}
+body[data-surface=floating] .apply-panel{display:block}
+body[data-surface=floating] .apply-controls{justify-content:flex-end;margin:0}
+body[data-surface=floating] .apply-controls .replace-field{flex:0 0 154px}
+body[data-surface=floating] .apply-controls .trigger-field{flex:0 0 180px}
+body[data-surface=floating] .apply-controls .primary{flex:0 0 max(320px,calc((100% + 36px)/3));max-width:calc(50% - 5px)}
+body[data-surface=floating] #play-toggle{min-width:58px;background:#f6f4f1;border-color:#dedbd5;color:#6f6a64;box-shadow:none}
+body[data-surface=floating] #play-toggle:hover{background:#efede8;border-color:#d4d0c9;color:var(--ink)}
+
+body[data-surface=sidebar] .topbar{padding:10px 12px;gap:6px;flex-wrap:nowrap}
+body[data-surface=sidebar] .mode-tabs{width:auto;min-width:0;flex:1;order:initial;margin:0}
+body[data-surface=sidebar] .mode-tabs button{font-size:11px;padding:7px 8px}
+body[data-surface=sidebar] .pin-toggle{display:none}
+body[data-surface=sidebar] .category-nav{height:42px;padding:0 8px;gap:0;justify-content:space-between}
+body[data-surface=sidebar] .category-nav button{padding:0 8px;font-size:12px;gap:5px}
+body[data-surface=sidebar] .category-count{font-size:9px}
+body[data-surface=sidebar] .workspace{display:flex;flex-direction:column;align-items:stretch}
+body[data-surface=sidebar] .library{order:0;padding:15px;border-right:0;flex:none}
+body[data-surface=sidebar] .library .section-heading,body[data-surface=sidebar] .library-foot{display:none}
+body[data-surface=sidebar] .library-filters{margin:10px 0}
+body[data-surface=sidebar] .effect-grid{grid-template-columns:repeat(3,minmax(0,1fr));height:clamp(178px,38vh,350px);max-height:none;gap:8px;overflow-y:scroll;scrollbar-gutter:stable}
+body[data-surface=sidebar] .library{--pang-thumb-size:42px}
+body[data-surface=sidebar] .tile-visual{height:60px}
+body[data-surface=sidebar] .tile-name{display:flex;align-items:center;justify-content:center;min-height:24px;font-size:10px;padding:4px 6px 6px;line-height:1.25}
+body[data-surface=sidebar] .preview-column{padding:0 0 17px}
+body[data-surface=sidebar] .preview-heading h2{font-size:17px}
+body[data-surface=sidebar] .effect-description{font-size:10px;min-height:0;margin:7px 0 10px}
+body[data-surface=sidebar] .stage-toolbar,body[data-surface=sidebar] .timeline-ticks{display:none}
+body[data-surface=sidebar] .stage-shell{aspect-ratio:1.9;min-height:0;border-radius:7px}
+body[data-surface=sidebar] .transport{margin-top:9px;gap:8px;flex-wrap:nowrap}
+body[data-surface=sidebar] .transport .button{padding:6px 11px;font-size:11px}
+body[data-surface=sidebar] .timecode{font-size:10px;margin-left:auto}
+body[data-surface=sidebar] .timeline-label{margin-top:9px}
+body[data-surface=sidebar] .inspector{order:2;display:block;flex:none;border:0;border-top:1px solid var(--line);padding:15px}
+body[data-surface=sidebar] .inspector .section-heading{margin-bottom:12px}
+body[data-surface=sidebar] .control-section{margin:0 0 16px}
+body[data-surface=sidebar] .control-section legend{display:none}
+body[data-surface=sidebar] .apply-panel{padding:10px 10px 13px}
+body[data-surface=sidebar] .apply-controls{gap:6px;margin:0;flex-wrap:nowrap}
+body[data-surface=sidebar] .apply-controls .replace-field{min-width:94px;flex:.82}
+body[data-surface=sidebar] .apply-controls .trigger-field{min-width:126px;flex:1.12}
+body[data-surface=sidebar] .apply-controls .primary{min-width:110px;flex:.96;font-size:10px;padding:7px 6px}
+body[data-surface=sidebar] .apply-controls .brand-select>button{font-size:10px;padding:7px 7px}
+body[data-surface] .apply-panel .brand-select-list{top:auto;bottom:calc(100% + 5px)}
+@media(max-width:340px){body[data-surface=sidebar] .apply-controls{flex-wrap:wrap}body[data-surface=sidebar] .apply-controls .replace-field,body[data-surface=sidebar] .apply-controls .trigger-field{min-width:0;flex:1 1 calc(50% - 3px)}body[data-surface=sidebar] .apply-controls .primary{min-width:0;flex:1 0 100%}}
+@media(max-width:360px){body[data-surface=sidebar] .topbar{gap:4px;padding:9px 10px}body[data-surface=sidebar] .mode-tabs button{font-size:10px;padding:6px}}
+
+body[data-surface] .inspector>.section-heading{padding-top:18px;border-top:1px solid var(--line)}
+body[data-surface] .preview-column .stage-toolbar,body[data-surface] .preview-column .timeline-ticks{display:none}
+body[data-surface] .preview-column .stage-shell{aspect-ratio:1.85;min-height:0;border-radius:7px}
+body[data-surface] .preview-column .transport{margin-top:9px;gap:8px;flex-wrap:nowrap}
+body[data-surface] .preview-column .transport .button{padding:5px 10px;font-size:11px}
+body[data-surface] .preview-column .timecode{font-size:10px;margin-left:auto}
+body[data-surface] .preview-column .timeline-label{margin-top:9px}
+
+.library .search-field{margin-bottom:12px}

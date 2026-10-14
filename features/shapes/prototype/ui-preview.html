@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>形状效果 · UI 预览</title>
+<style>
+*{box-sizing:border-box}body{height:100dvh;display:flex;flex-direction:column;overflow:hidden;margin:0;background:#f0efed;font:13px system-ui;color:#605b57}header{flex-shrink:0;min-height:52px;padding:10px 22px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}header strong{color:#292522}header small{margin-right:auto}select{font:inherit;border:1px solid #ddd8d3;background:#fff;border-radius:7px;padding:5px 8px}iframe{display:block;width:min(1080px,100%);flex:1;min-height:0;height:auto;margin:0 auto 12px;border:1px solid #dfdcd7;border-radius:12px;background:#fff;box-shadow:0 8px 35px #30251d0d}
+</style>
+<header><strong>界面预览</strong><small>示例场景 · 拖动参数查看玻璃折射</small><label>背景 <select id="background"><option value="artwork">香槟琥珀 · 图片</option><option value="light">浅色 · 色块</option><option value="silk">蓝紫折叠</option><option value="grid">折射网格</option><option value="dark">深色 · 色带</option><option value="white">纯白对照</option></select></label><label>形状 <select id="shape"><option value="rounded">圆角矩形</option><option value="circle">圆形</option><option value="star">星形</option></select></label></header>
+<iframe title="形状效果参数面板"></iframe>
+<script>
+let currentEffect=new URLSearchParams(location.search).get('effect')==='glass'?'glass':'gradient';
+const backgrounds={gradient:'black',glass:'artwork'};
+const backgroundSelect=document.querySelector('#background');
+backgroundSelect.add(new Option('黑色','black'),0);backgroundSelect.value=backgrounds[currentEffect];
+async function show(){
+ const [source,mock]=await Promise.all([fetch('index.html',{cache:'no-store'}).then(r=>r.text()),fetch('ui-preview-host.js',{cache:'no-store'}).then(r=>r.text())]);
+ const html=new URLSearchParams(location.search).get('effect')==='glass'?source.replace('id="ppt-material-lab"','id="ppt-material-lab" data-initial-effect="glass"'):source;
+ const config=JSON.stringify({backgrounds,shape:document.querySelector('#shape').value});
+ document.querySelector('iframe').srcdoc=html.replace('<head>','<head><script>globalThis.previewConfig='+config+';'+mock+'<\/script>');
+}
+document.querySelectorAll('select').forEach(el=>el.addEventListener('change',()=>{
+ backgrounds[currentEffect]=backgroundSelect.value;
+ const update=document.querySelector('iframe').contentWindow.updatePreviewScene;
+ if(update)update({backgrounds:{...backgrounds},shape:document.querySelector('#shape').value});
+}));show();
+document.querySelector('iframe').addEventListener('load',()=>{
+ const root=document.querySelector('iframe').contentDocument.querySelector('#ppt-material-lab');if(!root)return;
+ const sync=()=>{currentEffect=root.dataset.effect||currentEffect;backgroundSelect.value=backgrounds[currentEffect];};
+ new MutationObserver(sync).observe(root,{attributes:true,attributeFilter:['data-effect']});sync();
+});
+</script>
+</html>

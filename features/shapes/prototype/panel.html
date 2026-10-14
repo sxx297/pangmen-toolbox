@@ -1,0 +1,263 @@
+<div id="ppt-material-lab" aria-label="PowerPoint 形状效果编辑器">
+  <style>
+    #ppt-material-lab { --ml-panel:light-dark(#f4f5f8,#24262f); --ml-line:light-dark(#dadce7,#414451); --ml-text:light-dark(#252735,#eeeff7); --ml-muted:light-dark(#626778,#b3b7c9); --ml-selected:light-dark(#353c65,#ced5ff); --ml-on-selected:light-dark(#fff,#171d39); color:var(--ml-text); font:14px/1.5 "Segoe UI","Microsoft YaHei",sans-serif; width:100%; }
+    #ppt-material-lab * { box-sizing:border-box; }
+    #ppt-material-lab button,#ppt-material-lab input,#ppt-material-lab select { font:inherit; min-width:0; }
+    #ppt-material-lab button { cursor:pointer; }
+    #ppt-material-lab button:disabled { cursor:default; opacity:.4; }
+    #ppt-material-lab .ml-heading,#ppt-material-lab .ml-row { display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    #ppt-material-lab .ml-heading { margin-bottom:16px; }
+    #ppt-material-lab strong { font-weight:500; }
+    #ppt-material-lab .ml-heading strong { font-size:17px; }
+    #ppt-material-lab .ml-note { color:var(--ml-muted); font-size:12px; }
+    #ppt-material-lab .ml-modes { display:grid; grid-template-columns:1fr 1fr; gap:6px; padding:5px; background:var(--ml-panel); border-radius:11px; margin-bottom:20px; }
+    #ppt-material-lab .ml-mode { border:0; padding:11px 16px; color:var(--ml-muted); border-radius:7px; background:transparent; }
+    #ppt-material-lab .ml-mode[aria-selected="true"] { background:var(--ml-selected); color:var(--ml-on-selected); }
+    #ppt-material-lab .ml-workspace { display:grid; grid-template-columns:minmax(0,1.35fr) minmax(270px,1fr); gap:25px; align-items:start; }
+    #ppt-material-lab .ml-stage { background:#070c17; border-radius:15px; overflow:hidden; }
+    #ppt-material-lab .ml-canvas-wrap { position:relative; }
+    #ppt-material-lab .ml-overlay { position:absolute; inset:0; pointer-events:none; overflow:hidden; }
+    #ppt-material-lab .ml-gizmo-box { position:absolute; border:1px dashed #c9e4ff; box-shadow:0 0 0 1px #10234070; pointer-events:auto; cursor:move; touch-action:none; }
+    #ppt-material-lab .ml-gizmo-handle { position:absolute; width:24px; height:24px; padding:0; border:0; margin:-12px; background:transparent; pointer-events:auto; touch-action:none; color:#e8f5ff; }
+    #ppt-material-lab .ml-gizmo-handle::after { content:""; position:absolute; width:9px; height:9px; left:7px; top:7px; background:#e8f5ff; border:1px solid #5275bc; border-radius:2px; }
+    #ppt-material-lab .ml-gizmo-handle[data-handle="move"] { cursor:move; width:32px; height:32px; margin:-16px; border:1px solid #e5f2ff; border-radius:50%; background:#243454e6; box-shadow:0 2px 10px #0009; z-index:3; font-size:11px; font-variant-numeric:tabular-nums; }
+    #ppt-material-lab .ml-gizmo-handle[data-handle="move"]::after { display:none; }
+    #ppt-material-lab .ml-blur-ring { --ml-blur-angle:0deg; position:absolute; width:64px; height:64px; margin:-32px; padding:0; border:0; border-radius:50%; background:transparent; pointer-events:auto; touch-action:none; cursor:grab; z-index:2; clip-path:circle(50%); }
+    #ppt-material-lab .ml-blur-ring::before { content:""; position:absolute; inset:0; border-radius:50%; background:conic-gradient(#a9deff 0deg var(--ml-blur-angle),#7186ae66 var(--ml-blur-angle) 360deg); mask:radial-gradient(circle at center,transparent 23px,#000 24px 28px,transparent 29px); }
+    #ppt-material-lab .ml-blur-ring::after { content:""; position:absolute; left:28px; top:2px; width:8px; height:8px; border-radius:50%; background:#eaf7ff; box-shadow:0 0 0 1px #4b709b; transform-origin:4px 30px; transform:rotate(var(--ml-blur-angle)); }
+    #ppt-material-lab .ml-blur-ring:focus-visible { outline:2px solid #e8f5ff; outline-offset:-2px; }
+    #ppt-material-lab .ml-overlay[data-adjusting-blur="true"] .ml-blur-ring { cursor:grabbing; }
+    #ppt-material-lab .ml-gizmo-handle[data-handle="e"],#ppt-material-lab .ml-gizmo-handle[data-handle="w"] { cursor:ew-resize; }
+    #ppt-material-lab .ml-gizmo-handle[data-handle="n"],#ppt-material-lab .ml-gizmo-handle[data-handle="s"] { cursor:ns-resize; }
+    #ppt-material-lab .ml-gizmo-handle[data-handle="ne"],#ppt-material-lab .ml-gizmo-handle[data-handle="sw"] { cursor:nesw-resize; }
+    #ppt-material-lab .ml-gizmo-handle[data-handle="nw"],#ppt-material-lab .ml-gizmo-handle[data-handle="se"] { cursor:nwse-resize; }
+    #ppt-material-lab .ml-gizmo-caption { position:absolute; left:10px; top:9px; padding:4px 7px; color:#e6eeff; background:#142039dd; border-radius:5px; font-size:12px; max-width:calc(100% - 20px); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+    #ppt-material-lab .ml-stage-help { padding:0 16px 11px; color:#bfcce5; font-size:12px; }
+    #ppt-material-lab .ml-overlay-toggle { margin:9px 0 0; }
+    #ppt-material-lab canvas { display:block; width:100%; height:auto; aspect-ratio:5/4; }
+    #ppt-material-lab .ml-stage-meta { padding:0 16px 15px; color:#c0cce6; font-size:12px; }
+    #ppt-material-lab .ml-geometry { margin-bottom:12px; display:flex; align-items:center; gap:9px; flex-wrap:wrap; }
+    #ppt-material-lab .ml-geometry select { flex:1; }
+    #ppt-material-lab .ml-section-label { display:block; margin:19px 0 9px; font-weight:500; }
+    #ppt-material-lab .ml-presets { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:9px; }
+    #ppt-material-lab .ml-preset { border:0; background:transparent; color:var(--ml-muted); padding:3px; font-size:12px; text-align:center; border-radius:9px; }
+    #ppt-material-lab .ml-preset[aria-pressed="true"] { color:var(--ml-text); }
+    #ppt-material-lab .ml-swatch { display:block; height:42px; border:1px solid #68779950; border-radius:8px; margin-bottom:7px; }
+    #ppt-material-lab .ml-preset[aria-pressed="true"] .ml-swatch { outline:2px solid currentColor; outline-offset:2px; }
+    #ppt-material-lab .ml-blue { background:radial-gradient(ellipse at 50% 130%,#adfbff 5%,#385dff 34%,transparent 68%),#050917; }
+    #ppt-material-lab .ml-purple { background:radial-gradient(ellipse at 80% -50%,#fff 0%,#ae8bff 28%,transparent 64%),radial-gradient(ellipse at 5% 110%,#d477ff,transparent 62%),#110b22; }
+    #ppt-material-lab .ml-aurora { background:radial-gradient(ellipse at 80% 0%,#2ee3ff,transparent 65%),radial-gradient(ellipse at 10% 110%,#6c38ff,transparent 68%),#080817; }
+    #ppt-material-lab .ml-glass { background:linear-gradient(115deg,#25334c,#a2cfff 45%,#3b526d 53%,#1b2a47); }
+    #ppt-material-lab .ml-frosted { background:linear-gradient(125deg,#8399b2,#c2d5e3,#648498); }
+    #ppt-material-lab .ml-smoked { background:linear-gradient(125deg,#222c3c,#3e4e68 50%,#121b2c); }
+    #ppt-material-lab .ml-controls { min-width:0; }
+    #ppt-material-lab .ml-field { display:block; margin:0 0 12px; min-width:0; }
+    #ppt-material-lab .ml-label { display:flex; align-items:center; justify-content:space-between; gap:8px; margin-bottom:4px; }
+    #ppt-material-lab output { color:var(--ml-muted); font-variant-numeric:tabular-nums; }
+    #ppt-material-lab input[type="range"] { display:block; width:100%; accent-color:var(--ml-selected); cursor:pointer; margin:4px 0; min-height:20px; }
+    #ppt-material-lab input[type="text"],#ppt-material-lab select { width:100%; border:1px solid var(--ml-line); background:var(--ml-panel); color:var(--ml-text); border-radius:7px; padding:7px 8px; }
+    #ppt-material-lab .ml-color { display:flex; align-items:center; gap:8px; cursor:pointer; }
+    #ppt-material-lab input[type="color"] { width:32px; height:32px; padding:2px; border:1px solid var(--ml-line); border-radius:7px; background:var(--ml-panel); cursor:pointer; }
+    #ppt-material-lab .ml-grid { display:grid; grid-template-columns:1fr 1fr; gap:0 14px; }
+    #ppt-material-lab .ml-actions { display:flex; gap:7px; flex-wrap:wrap; align-items:center; }
+    #ppt-material-lab .ml-action { background:var(--ml-panel); color:var(--ml-text); border:1px solid var(--ml-line); border-radius:7px; padding:7px 10px; }
+    #ppt-material-lab .ml-primary { background:var(--ml-selected); color:var(--ml-on-selected); border-color:transparent; }
+    #ppt-material-lab .ml-compact { padding:5px 8px; font-size:12px; }
+    #ppt-material-lab .ml-check { display:flex; align-items:center; gap:7px; cursor:pointer; margin:8px 0; }
+    #ppt-material-lab input[type="checkbox"] { accent-color:var(--ml-selected); }
+    #ppt-material-lab .ml-rule { border:0; border-top:1px solid var(--ml-line); margin:17px 0; }
+    #ppt-material-lab details { margin:13px 0; }
+    #ppt-material-lab summary { cursor:pointer; color:var(--ml-muted); margin-bottom:11px; }
+    #ppt-material-lab .ml-status { margin-top:12px; color:var(--ml-muted); font-size:12px; min-height:18px; overflow-wrap:anywhere; }
+    #ppt-material-lab .ml-layer-tools { margin:8px 0 13px; }
+    #ppt-material-lab .ml-layer-meta { margin:10px 0 12px; }
+    #ppt-material-lab .ml-library { margin-top:18px; }
+    #ppt-material-lab .ml-library .ml-actions { margin-top:8px; }
+    #ppt-material-lab [hidden] { display:none !important; }
+    #ppt-material-lab .ml-heading { margin-bottom:12px; }
+    #ppt-material-lab .ml-modes { padding:3px; margin-bottom:18px; background:var(--ml-panel); }
+    #ppt-material-lab .ml-mode { padding:9px 16px; }
+    #ppt-material-lab .ml-workspace { grid-template-columns:minmax(0,1.25fr) minmax(270px,1fr); gap:24px; }
+    #ppt-material-lab .ml-preview-column { min-width:0; align-self:start; position:sticky; top:16px; }
+    #ppt-material-lab .ml-stage { background:var(--ml-panel); border-radius:10px; }
+    #ppt-material-lab .ml-stage-meta,#ppt-material-lab .ml-gizmo-caption { display:none !important; }
+    #ppt-material-lab .ml-stage-help,#ppt-material-lab #ml-host-help,#ppt-material-lab #ml-host-version { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+    #ppt-material-lab .ml-preview-bar { margin:0 0 8px; }
+    #ppt-material-lab .ml-preview-bar .ml-check { margin:0; font-size:12px; color:var(--ml-muted); }
+    #ppt-material-lab #ml-host-panel { margin:0 0 16px; padding:0 0 12px; border-bottom:1px solid var(--ml-line); }
+    #ppt-material-lab #ml-host-target { font-weight:400; font-size:12px; color:var(--ml-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:60%; }
+    #ppt-material-lab .ml-host-switches { display:flex; align-items:center; gap:15px; flex-wrap:wrap; }
+    #ppt-material-lab .ml-host-switches .ml-check { font-size:12px; margin:0; }
+    #ppt-material-lab .ml-host-actions { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-top:10px; }
+    #ppt-material-lab #ml-host-status { margin:0 0 0 auto; font-size:12px; max-width:100%; min-height:0; }
+    #ppt-material-lab #ml-host-status[role="alert"] { color:light-dark(#a92727,#ffaaaa); }
+    #ppt-material-lab[data-hosted="true"] .ml-heading { display:none; }
+    #ppt-material-lab #ml-host-restore { background:transparent; border-color:transparent; color:var(--ml-muted); }
+    #ppt-material-lab details { border-top:1px solid var(--ml-line); padding-top:12px; margin:14px 0; }
+    #ppt-material-lab details summary { color:var(--ml-text); font-size:12px; }
+    #ppt-material-lab .ml-library { margin-top:16px; }
+    #ppt-material-lab .ml-field { margin-bottom:10px; }
+    #ppt-material-lab .ml-label { font-size:12px; color:var(--ml-muted); }
+    #ppt-material-lab .ml-layer-tools { margin:8px 0 12px; }
+    #ppt-material-lab .ml-status:empty { display:none; }
+    html[data-material-hosted="true"] body { padding:20px; }
+    @media(max-width:640px) { #ppt-material-lab .ml-preview-column { position:static; } }
+    @media(max-width:640px) { #ppt-material-lab .ml-workspace { grid-template-columns:1fr; gap:24px; } }
+    @media(pointer:coarse) { #ppt-material-lab input[type="range"] { min-height:34px; } #ppt-material-lab .ml-action,#ppt-material-lab .ml-check { min-height:40px; } #ppt-material-lab input[type="text"],#ppt-material-lab select { font-size:16px; } }
+
+    #ppt-material-lab .ml-layer-heading { margin-bottom:10px; }
+    #ppt-material-lab .ml-icon-button { display:inline-grid; place-items:center; width:28px; height:28px; padding:0; border:0; border-radius:6px; color:var(--ml-muted); background:transparent; font-size:19px; flex-shrink:0; }
+    #ppt-material-lab .ml-icon-button:hover { background:var(--ml-panel); color:var(--ml-text); }
+    #ppt-material-lab button:focus-visible { outline:2px solid #5986e8; outline-offset:2px; }
+    #ppt-material-lab .ml-add-wrap { position:relative; }
+    #ppt-material-lab .ml-add-menu { position:absolute; right:0; top:33px; min-width:150px; padding:5px; background:light-dark(#fff,#292d38); box-shadow:0 8px 25px #0002; border:1px solid var(--ml-line); border-radius:9px; z-index:8; }
+    #ppt-material-lab .ml-add-menu button { display:flex; gap:10px; width:100%; padding:9px 10px; border:0; border-radius:5px; background:transparent; color:var(--ml-text); text-align:left; }
+    #ppt-material-lab .ml-add-menu button:hover { background:var(--ml-panel); }
+    #ppt-material-lab .ml-layer-list { max-height:284px; overflow-y:auto; overscroll-behavior:contain; padding:3px; margin:-3px; scrollbar-width:thin; }
+    #ppt-material-lab .ml-layer-row { display:flex; align-items:center; gap:3px; padding:5px 3px; margin-bottom:4px; min-height:42px; border:1px solid var(--ml-line); border-radius:8px; position:relative; }
+    #ppt-material-lab .ml-layer-row[data-selected="true"] { border-color:light-dark(#acc8f7,#6383b5); background:light-dark(#edf4ff,#25354e); }
+    #ppt-material-lab .ml-layer-row[data-enabled="false"] .ml-layer-pick { opacity:.45; }
+    #ppt-material-lab .ml-layer-pick { display:flex; align-items:center; gap:8px; min-width:0; flex:1; color:var(--ml-text); text-align:left; background:transparent; border:0; padding:4px 0; }
+    #ppt-material-lab .ml-layer-chip { width:16px; height:16px; border:1px solid #7b849655; border-radius:4px; flex-shrink:0; }
+    #ppt-material-lab .ml-layer-chip[data-shadow="true"] { box-shadow:inset 3px 3px 3px #0005; border-radius:50%; }
+    #ppt-material-lab .ml-layer-title { overflow:hidden; white-space:nowrap; text-overflow:ellipsis; flex:1; font-size:12px; }
+    #ppt-material-lab .ml-layer-mode { font-size:10px; color:var(--ml-muted); white-space:nowrap; }
+    #ppt-material-lab .ml-layer-row .ml-icon-button { width:24px; height:26px; font-size:17px; }
+    #ppt-material-lab .ml-layer-row svg { width:16px; height:16px; }
+    #ppt-material-lab .ml-layer-grip { cursor:grab; touch-action:none; }
+    #ppt-material-lab .ml-layer-row[data-dragging="true"] { opacity:.4; }
+    #ppt-material-lab .ml-layer-row[data-drop="before"]::before,#ppt-material-lab .ml-layer-row[data-drop="after"]::after { content:""; position:absolute; height:2px; background:#4c86e8; left:0; right:0; }
+    #ppt-material-lab .ml-layer-row[data-drop="before"]::before { top:-4px; }
+    #ppt-material-lab .ml-layer-row[data-drop="after"]::after { bottom:-4px; }
+    #ppt-material-lab .ml-layer-card { margin-top:13px; border:1px solid var(--ml-line); border-radius:10px; padding:12px; }
+    #ppt-material-lab .ml-layer-card-heading { display:flex; align-items:center; gap:8px; margin-bottom:10px; }
+    #ppt-material-lab .ml-layer-card-heading .ml-note { white-space:nowrap; font-size:10px; }
+    #ppt-material-lab #ml-layer-name { flex:1; border-color:transparent; background:transparent; padding:3px; font-size:12px; }
+    #ppt-material-lab #ml-layer-name:focus { border-color:var(--ml-line); }
+    #ppt-material-lab .ml-blend-field { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+    #ppt-material-lab #ml-layer-blend { width:120px; padding:4px 7px; font-size:12px; }
+    #ppt-material-lab .ml-position-heading { border-top:1px solid var(--ml-line); padding-top:10px; margin:5px 0 10px; }
+    #ppt-material-lab .ml-layer-empty { display:grid; justify-items:center; gap:10px; padding:20px; color:var(--ml-muted); border:1px dashed var(--ml-line); border-radius:8px; font-size:12px; }
+    #ppt-material-lab .ml-row-rename { width:100%; font-size:12px; padding:3px; }
+  </style>
+  <div class="ml-heading"><strong>形状效果</strong><span class="ml-note" id="ml-environment">交互原型 · 尚未接入 PowerPoint</span></div>
+  <div class="ml-topbar">
+  <div class="ml-modes" role="tablist" aria-label="效果类型">
+    <button type="button" id="ml-tab-gradient" class="ml-mode" role="tab" aria-selected="true" aria-controls="ml-editor" data-effect="gradient">弥散渐变</button>
+    <button type="button" id="ml-tab-glass" class="ml-mode" role="tab" aria-selected="false" aria-controls="ml-editor" data-effect="glass">液态玻璃</button>
+  </div>
+  <div id="ml-host-panel" hidden>
+    <span class="ml-note" id="ml-host-version"></span>
+    <div class="ml-host-switches"><label class="ml-check" title="使用 PowerPoint 时保持面板在前方"><input type="checkbox" id="ml-host-pin" checked>面板置顶</label><button type="button" class="ml-action" id="ml-host-mode" aria-label="停靠到右侧" hidden></button></div>
+    <p class="ml-note" id="ml-host-help">选区自动跟随。</p>
+  </div>
+  </div>
+  <div class="ml-workspace" id="ml-editor" role="tabpanel" aria-labelledby="ml-tab-gradient">
+    <div class="ml-preview-column">
+      <label class="ml-geometry" id="ml-geometry-field">预览形状<select id="ml-shape" aria-label="预览形状"></select></label>
+      <label class="ml-geometry" id="ml-background-field" hidden>预览背景<select id="ml-background" aria-label="预览背景"><option value="silk">蓝紫折叠</option><option value="type">文字与色块</option><option value="grid">折射网格</option></select></label>
+      <div class="ml-row ml-preview-bar"><div class="ml-preview-context"><strong>预览</strong><button type="button" class="ml-action" id="ml-host-capture" title="重新读取当前形状及背后的幻灯片内容" disabled hidden>刷新背景</button></div><div class="ml-actions"><button type="button" class="ml-action" id="ml-preview-toggle" aria-expanded="true" hidden>收起</button><label class="ml-check ml-overlay-toggle"><input id="ml-show-handles" type="checkbox" checked>图层控件</label><button type="button" class="ml-action ml-compact ml-export-button" id="ml-export-png" title="导出不含编辑控件的材质 PNG">导出 PNG</button></div></div>
+      <div class="ml-stage">
+        <div class="ml-canvas-wrap"><span id="ml-preview-loading" hidden>正在读取背景…</span>
+          <canvas id="ml-canvas" width="900" height="720" role="img" aria-label="当前形状效果预览">形状效果预览</canvas>
+          <div class="ml-overlay" id="ml-overlay" aria-label="选中图层的拖动与缩放控件">
+            <div class="ml-gizmo-box" id="ml-gizmo-box"></div>
+            <span class="ml-gizmo-caption" id="ml-gizmo-caption">拖动当前图层</span>
+            <button type="button" class="ml-blur-ring" id="ml-blur-ring" role="slider" aria-label="当前图层模糊，拖动圆环调整" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-describedby="ml-stage-help"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="move" aria-label="移动当前图层"><span id="ml-ring-blur-value" aria-hidden="true">0</span></button>
+            <button type="button" class="ml-gizmo-handle ml-rotate-handle" data-handle="rotate" role="slider" aria-label="旋转当前图层" aria-valuemin="-180" aria-valuemax="180" aria-valuenow="0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M18.5 8A7 7 0 1 0 19 15M19 3v6h-6"/></svg></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="nw" aria-label="从左上角缩放图层"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="n" aria-label="调整图层上边"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="ne" aria-label="从右上角缩放图层"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="e" aria-label="调整图层右边"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="se" aria-label="从右下角缩放图层"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="s" aria-label="调整图层下边"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="sw" aria-label="从左下角缩放图层"></button>
+            <button type="button" class="ml-gizmo-handle" data-handle="w" aria-label="调整图层左边"></button>
+          </div>
+        </div>
+        <div class="ml-stage-help" id="ml-stage-help">拖中心移动 · 拖圆环调模糊 · 拖边缩放 · Shift＋拖角等比</div>
+        <div class="ml-stage-meta ml-row"><span id="ml-material-name">冰蓝弥散</span><span id="ml-shape-name">圆角矩形</span></div>
+      </div>
+      <div class="ml-preset-toolbar"><span id="ml-current-preset" title="当前材质">冰蓝弥散</span><button type="button" class="ml-action" id="ml-reset-preset" title="恢复当前预设载入或保存时的参数" disabled>重置</button><button type="button" class="ml-action" id="ml-open-library">预设库</button><button type="button" class="ml-action" id="ml-save-preset">保存预设</button></div>
+      <div id="ml-quick-presets" class="ml-quick-presets" role="group" aria-label="快捷预设"></div>
+      <div class="ml-status" id="ml-status" role="status" aria-live="polite">预设可以修改并另存；切换形状不会重置材质。</div>
+    </div>
+    <div class="ml-controls" aria-label="效果参数">
+      <div class="ml-row" style="margin-bottom:12px"><strong id="ml-parameters-title">渐变设置</strong><button type="button" class="ml-action ml-compact" id="ml-new">从空白开始</button></div>
+      <div class="ml-grid">
+        <label class="ml-color"><input id="ml-base" type="color" value="#060a1d" aria-label="底色"><span id="ml-base-label">底色</span></label>
+        <label class="ml-field"><span class="ml-label"><span id="ml-opacity-label">底色不透明度</span><output id="ml-opacity-value">96</output></span><input id="ml-opacity" data-global-key="opacity" type="range" min="0" max="100" value="96"></label>
+      </div>
+      <div id="ml-glass-controls" hidden>
+        <label class="ml-field"><span class="ml-label">折射强度<output id="ml-refraction-value">64</output></span><input id="ml-refraction" data-global-key="refraction" type="range" min="0" max="300" value="64"></label>
+        <label class="ml-field"><span class="ml-label">背景模糊<output id="ml-blur-value">12</output></span><input id="ml-blur" data-global-key="blur" type="range" min="0" max="100" value="12"></label>
+        <details><summary>厚度、边缘与色散</summary><div class="ml-grid">
+          <label class="ml-field"><span class="ml-label">玻璃厚度<output id="ml-thickness-value">90</output></span><input id="ml-thickness" data-global-key="thickness" type="range" min="0" max="100" value="90"></label>
+          <label class="ml-field"><span class="ml-label">边缘宽度<output id="ml-bezelWidth-value">36</output></span><input id="ml-bezelWidth" data-global-key="bezelWidth" type="range" min="0" max="100" value="36"></label>
+        </div>
+        <div class="ml-grid">
+          <label class="ml-field"><span class="ml-label">边缘反射<output id="ml-fresnel-value">42</output></span><input id="ml-fresnel" data-global-key="fresnel" type="range" min="0" max="100" value="42"></label>
+          <label class="ml-field"><span class="ml-label">色散<output id="ml-dispersion-value">28</output></span><input id="ml-dispersion" data-global-key="dispersion" type="range" min="0" max="100" value="28"></label>
+        </div>
+        </details>
+      </div>
+      <label class="ml-field"><span class="ml-label">整体色光强度<output id="ml-glow-value">77</output></span><input id="ml-glow" data-global-key="glow" type="range" min="0" max="100" value="77"></label>
+      <div id="ml-layer-section">
+        <hr class="ml-rule">
+        <div class="ml-row ml-layer-heading"><strong>效果图层</strong><div class="ml-actions"><span class="ml-note" id="ml-layer-count">0 / 16</span><div class="ml-add-wrap">
+          <button type="button" class="ml-icon-button" id="ml-add-toggle" aria-label="添加效果图层" aria-expanded="false" aria-controls="ml-add-menu">＋</button>
+          <div id="ml-add-menu" class="ml-add-menu" hidden><button type="button" id="ml-add-layer">✦ <span>色光</span></button><button type="button" id="ml-add-shadow">◩ <span>内阴影</span></button></div>
+        </div></div></div>
+        <div id="ml-layer-list" class="ml-layer-list" role="list" aria-label="效果图层，越靠上越靠前"></div>
+        <div id="ml-layer-empty" class="ml-layer-empty" hidden>还没有效果图层<button type="button" class="ml-action ml-compact" id="ml-add-empty">＋ 添加图层</button></div>
+        <div id="ml-layer-fields" class="ml-layer-card">
+          <div class="ml-layer-card-heading"><span class="ml-note" id="ml-layer-type">色光</span><input id="ml-layer-name" type="text" maxlength="40" aria-label="图层名称" value="色光"><button type="button" id="ml-close-layer" class="ml-icon-button" aria-label="收起图层参数">×</button></div>
+          <label class="ml-blend-field"><span class="ml-note">混合模式</span><select id="ml-layer-blend" aria-label="图层混合模式"><option value="pass-through">穿透</option><option value="normal">正常</option><optgroup label="变暗"><option value="darken">变暗</option><option value="multiply">正片叠底</option><option value="color-burn">颜色加深</option><option value="linear-burn">线性加深 · Plus darker</option></optgroup><optgroup label="变亮"><option value="lighten">变亮</option><option value="screen">滤色</option><option value="color-dodge">颜色减淡</option><option value="linear-dodge">线性减淡 · Plus lighter</option></optgroup><optgroup label="对比"><option value="overlay">叠加</option><option value="soft-light">柔光</option><option value="hard-light">强光</option></optgroup><optgroup label="比较"><option value="difference">差值</option><option value="exclusion">排除</option></optgroup><optgroup label="颜色"><option value="hue">色相</option><option value="saturation">饱和度</option><option value="color">颜色</option><option value="luminosity">明度</option></optgroup></select></label>
+          <div class="ml-row ml-layer-meta"><label class="ml-color"><input id="ml-layer-color" type="color" value="#345bff" aria-label="图层颜色">颜色</label><label class="ml-check" id="ml-contour-toggle-field"><input type="checkbox" id="ml-layer-contour">贴边色光</label></div>
+          <div class="ml-grid">
+            <label class="ml-field"><span class="ml-label">不透明度<output id="ml-layer-opacity-value">80</output></span><input id="ml-layer-opacity" data-layer-key="opacity" type="range" min="0" max="100" value="80"></label>
+            <label class="ml-field"><span class="ml-label"><span id="ml-layer-blur-label">图层模糊</span><output id="ml-layer-blur-value">20</output></span><input id="ml-layer-blur" data-layer-key="blur" type="range" min="0" max="100" value="20"></label>
+          </div>
+          <div class="ml-grid" id="ml-contour-width-field" hidden>
+            <label class="ml-field"><span class="ml-label">向内扩散宽度<output id="ml-layer-edgeWidth-value">30</output></span><input id="ml-layer-edgeWidth" data-layer-key="edgeWidth" type="range" min="1" max="100" step="0.1" value="30"></label>
+            <label class="ml-field"><span class="ml-label">高光内移<output id="ml-layer-edgeInset-value">0</output></span><input id="ml-layer-edgeInset" data-layer-key="edgeInset" type="range" min="0" max="100" step="0.1" value="0"></label>
+          </div>
+          <div id="ml-position"><div class="ml-note ml-position-heading">位置与变换</div>
+          <label class="ml-field"><span class="ml-label">旋转角度（°）<output id="ml-layer-rotation-value">0</output></span><input id="ml-layer-rotation" data-layer-key="rotation" type="range" min="-180" max="180" step="0.1" value="0"></label>
+          <div class="ml-grid" id="ml-light-fields">
+            <label class="ml-field"><span class="ml-label">水平位置<output id="ml-layer-x-value">50</output></span><input id="ml-layer-x" data-layer-key="x" type="range" min="0" max="100" step="0.1" value="50"></label>
+            <label class="ml-field"><span class="ml-label">垂直位置<output id="ml-layer-y-value">80</output></span><input id="ml-layer-y" data-layer-key="y" type="range" min="0" max="100" step="0.1" value="80"></label>
+            <label class="ml-field"><span class="ml-label">横向范围<output id="ml-layer-sizeX-value">70</output></span><input id="ml-layer-sizeX" data-layer-key="sizeX" type="range" min="1" max="150" step="0.1" value="70"></label>
+            <label class="ml-field"><span class="ml-label">纵向范围<output id="ml-layer-sizeY-value">50</output></span><input id="ml-layer-sizeY" data-layer-key="sizeY" type="range" min="1" max="150" step="0.1" value="50"></label>
+          </div>
+          <div class="ml-grid" id="ml-shadow-fields" hidden>
+            <label class="ml-field"><span class="ml-label">偏移 X（px）<output id="ml-layer-offsetX-value">0</output></span><input id="ml-layer-offsetX" data-layer-key="offsetX" type="range" min="-100" max="100" step="0.1" value="0"></label>
+            <label class="ml-field"><span class="ml-label">偏移 Y（px）<output id="ml-layer-offsetY-value">0</output></span><input id="ml-layer-offsetY" data-layer-key="offsetY" type="range" min="-100" max="100" step="0.1" value="0"></label>
+            <label class="ml-field"><span class="ml-label">扩展（px）<output id="ml-layer-spread-value">4</output></span><input id="ml-layer-spread" data-layer-key="spread" type="range" min="0" max="100" value="4"></label>
+          </div>
+          </div>
+          <div id="ml-shadow-help" hidden><button type="button" class="ml-action ml-compact" id="ml-shadow-glow">设为内发光</button></div>
+        </div>
+      </div>
+      <details id="ml-surface"><summary>边缘与表面</summary>
+        <label class="ml-field"><span class="ml-label">边缘高光<output id="ml-highlight-value">64</output></span><input id="ml-highlight" data-global-key="highlight" type="range" min="0" max="100" value="64"></label>
+        <label class="ml-color"><input id="ml-secondary" type="color" value="#84eaff" aria-label="高光颜色">高光颜色</label>
+        <div class="ml-grid" style="margin-top:12px">
+          <label class="ml-field"><span class="ml-label">光源 X<output id="ml-lightX-value">50</output></span><input id="ml-lightX" data-global-key="lightX" type="range" min="0" max="100" value="50"></label>
+          <label class="ml-field"><span class="ml-label">光源 Y<output id="ml-lightY-value">95</output></span><input id="ml-lightY" data-global-key="lightY" type="range" min="0" max="100" value="95"></label>
+        </div>
+        <label class="ml-field"><span class="ml-label">颗粒强度<output id="ml-grain-value">11</output></span><input id="ml-grain" data-global-key="grain" type="range" min="0" max="100" value="11"></label>
+      </details>
+      <details id="ml-preview-options"><summary>预览设置</summary>
+        <label class="ml-field" id="ml-radius-field"><span class="ml-label">预览圆角<output id="ml-radius-value">34</output></span><input id="ml-radius" type="range" min="0" max="80" value="34"></label>
+        <label class="ml-check" id="ml-content-field"><input id="ml-content" type="checkbox" checked>显示示例文字</label>
+        <span class="ml-note">形状与预览设置不写入材质预设。</span>
+      </details>
+    </div>
+  </div>
+  <footer id="ml-host-footer" hidden>
+    <div class="ml-target-status"><div id="ml-host-status" role="status" aria-live="polite">连接中…</div></div>
+    <div class="ml-host-actions"><button type="button" class="ml-action" id="ml-host-restore" disabled>恢复原样</button><button type="button" class="ml-action ml-primary" id="ml-host-apply" title="将当前预览应用到 PPT · Ctrl+Enter" disabled>应用到选中形状</button></div>
+  </footer>
+</div>

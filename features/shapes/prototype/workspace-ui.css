@@ -1,0 +1,438 @@
+/* Shared control and workspace styles. */
+#ppt-material-lab { --ml-accent:light-dark(#5366a4,#afbcfa); --ml-hover:light-dark(#eef1f8,#303541); --ml-paper:light-dark(#fcfcfd,#191c24); }
+#ppt-material-lab .ml-controls,#ppt-material-lab .ml-preview-column,#ppt-material-lab .ml-layer-list { scrollbar-gutter:stable; }
+html[data-material-hosted="true"] { height:100%; overflow:hidden; }
+html[data-material-hosted="true"] body { height:100%; padding:18px; overflow:hidden; }
+html[data-material-hosted="true"] main { height:100%; }
+#ppt-material-lab[data-hosted="true"] { height:100%; display:flex; flex-direction:column; min-height:0; }
+#ppt-material-lab[data-hosted="true"] .ml-modes,#ppt-material-lab #ml-host-panel { flex-shrink:0; }
+#ppt-material-lab[data-hosted="true"] .ml-workspace { min-height:0; flex:1; overflow:hidden; align-items:stretch; }
+#ppt-material-lab[data-hosted="true"] .ml-preview-column { position:static; overflow-y:auto; overscroll-behavior:contain; min-height:0; align-self:stretch; padding-right:5px; }
+#ppt-material-lab[data-hosted="true"] .ml-controls { min-height:0; overflow-y:auto; overscroll-behavior:contain; padding:0 14px 12px 0; }
+#ppt-material-lab .ml-action { min-height:32px; padding:6px 10px; font-size:12px; border-radius:7px; transition:background-color .12s; }
+#ppt-material-lab .ml-action:hover { background:var(--ml-hover); }
+#ppt-material-lab .ml-primary:hover { background:var(--ml-accent); }
+#ppt-material-lab input[type="range"] { appearance:none; height:24px; min-height:24px; margin:0; background:transparent; }
+#ppt-material-lab input[type="range"]::-webkit-slider-runnable-track { height:4px; border-radius:5px; background:linear-gradient(to right,var(--ml-accent) var(--ml-range-progress,0%),var(--ml-line) var(--ml-range-progress,0%)); }
+#ppt-material-lab input[type="range"]::-webkit-slider-thumb { appearance:none; height:12px; width:12px; margin-top:-4px; background:var(--ml-accent); border:2px solid var(--ml-paper); border-radius:50%; box-shadow:0 0 0 1px var(--ml-accent); }
+#ppt-material-lab input[type="range"]:hover::-webkit-slider-thumb { box-shadow:0 0 0 4px color-mix(in srgb,var(--ml-accent) 15%,transparent); }
+#ppt-material-lab input[type="range"]:focus-visible { outline:2px solid var(--ml-accent); outline-offset:2px; border-radius:5px; }
+#ppt-material-lab .ml-value-source,#ppt-material-lab .ml-native-select { display:none!important; }
+#ppt-material-lab .ml-number { width:56px; height:26px; padding:3px 5px; border:1px solid transparent; border-radius:5px; background:var(--ml-panel); color:var(--ml-text); font-size:12px; text-align:right; font-variant-numeric:tabular-nums; appearance:textfield; }
+#ppt-material-lab .ml-number::-webkit-inner-spin-button { appearance:none; }
+#ppt-material-lab .ml-number:focus { outline:2px solid var(--ml-accent); }
+#ppt-material-lab .ml-label { min-height:26px; }
+#ppt-material-lab details summary { list-style:none; display:flex; align-items:center; min-height:30px; margin:0 0 8px; font-size:12px; gap:9px; }
+#ppt-material-lab details summary::-webkit-details-marker { display:none; }
+#ppt-material-lab details summary::before { content:""; width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(-45deg); transition:transform .12s; flex-shrink:0; }
+#ppt-material-lab details[open] summary::before { transform:rotate(45deg); }
+#ppt-material-lab details summary:hover { color:var(--ml-accent); }
+#ppt-material-lab input[type="checkbox"] { appearance:none; width:14px; height:14px; border:1px solid var(--ml-line); border-radius:4px; background:var(--ml-panel); margin:0; display:grid; place-items:center; }
+#ppt-material-lab input[type="checkbox"]:checked { background:var(--ml-accent); border-color:var(--ml-accent); }
+#ppt-material-lab input[type="checkbox"]:checked::after { content:""; width:6px; height:3px; border-left:1.5px solid white; border-bottom:1.5px solid white; transform:translateY(-1px) rotate(-45deg); }
+#ppt-material-lab .ml-select-button { display:flex; align-items:center; justify-content:space-between; gap:12px; min-width:0; min-height:32px; width:100%; border:1px solid var(--ml-line); border-radius:7px; background:var(--ml-panel); color:var(--ml-text); padding:5px 9px; font-size:12px; text-align:left; }
+#ppt-material-lab .ml-select-button::after { content:""; width:6px; height:6px; border-right:1.5px solid currentColor; border-bottom:1.5px solid currentColor; transform:rotate(45deg) translateY(-2px); flex-shrink:0; }
+#ppt-material-lab .ml-blend-field .ml-select-button { width:130px; }
+#ppt-material-lab .ml-select-menu { position:fixed; overflow-y:auto; scrollbar-gutter:stable; border:1px solid var(--ml-line); border-radius:9px; padding:5px; background:var(--ml-paper); box-shadow:0 8px 28px #0002; z-index:50; }
+#ppt-material-lab .ml-select-menu button { display:block; width:100%; padding:7px 10px 7px 27px; text-align:left; position:relative; border:0; border-radius:5px; background:transparent; color:var(--ml-text); font-size:12px; }
+#ppt-material-lab .ml-select-menu button:hover,#ppt-material-lab .ml-select-menu button:focus { outline:none; background:var(--ml-hover); }
+#ppt-material-lab .ml-select-menu button[aria-selected="true"]::before { content:"✓"; position:absolute; left:8px; color:var(--ml-accent); }
+#ppt-material-lab .ml-menu-group { padding:8px 10px 3px; color:var(--ml-muted); font-size:10px; }
+#ppt-material-lab .ml-status { min-height:32px; max-height:32px; overflow:auto; margin:8px 0 0; }
+#ppt-material-lab .ml-status:empty { display:block; }
+#ppt-material-lab #ml-host-status { width:200px; min-height:20px; max-height:20px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; text-align:right; }
+#ppt-material-lab .ml-preset-toolbar { display:flex; align-items:center; gap:7px; margin:14px 0 10px; min-height:34px; }
+#ppt-material-lab #ml-current-preset { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:12px; }
+#ppt-material-lab .ml-preview-footer { display:flex; justify-content:space-between; gap:10px; align-items:center; border-top:1px solid var(--ml-line); padding-top:12px; }
+#ppt-material-lab .ml-preview-footer .ml-note { font-size:10px; }
+#ppt-material-lab #ml-preview-loading { position:absolute; top:10px; left:10px; z-index:8; background:var(--ml-paper); border:1px solid var(--ml-line); color:var(--ml-muted); border-radius:6px; padding:4px 8px; font-size:12px; }
+#ppt-material-lab dialog { color:var(--ml-text); background:var(--ml-paper); border:1px solid var(--ml-line); border-radius:14px; padding:0; box-shadow:0 20px 80px #0003; }
+#ppt-material-lab dialog::backdrop { background:#121b304f; }
+#ppt-material-lab #ml-library-dialog { width:min(880px,calc(100vw - 28px)); height:min(720px,calc(100dvh - 28px)); max-height:none; }
+#ppt-material-lab .ml-library-shell { display:flex; flex-direction:column; height:100%; padding:20px; gap:14px; min-height:0; }
+#ppt-material-lab .ml-library-title { font-size:18px; }
+#ppt-material-lab .ml-library-types { display:flex; gap:6px; }
+#ppt-material-lab .ml-library-types button { flex:1; }
+#ppt-material-lab .ml-library-types button[aria-pressed="true"] { background:var(--ml-selected); color:var(--ml-on-selected); }
+#ppt-material-lab .ml-library-body { flex:1; min-height:0; display:grid; grid-template-columns:minmax(0,1fr) 230px; gap:18px; }
+#ppt-material-lab .ml-library-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; align-content:start; overflow-y:auto; scrollbar-gutter:stable; padding:3px; }
+#ppt-material-lab .ml-library-card { min-width:0; border:1px solid var(--ml-line); border-radius:10px; padding:5px; position:relative; }
+#ppt-material-lab .ml-library-card[data-selected="true"] { border-color:var(--ml-accent); box-shadow:0 0 0 1px var(--ml-accent); }
+#ppt-material-lab .ml-card-pick { width:100%; padding:0; border:0; background:transparent; color:var(--ml-text); text-align:left; }
+#ppt-material-lab .ml-library-card canvas { width:100%; height:auto; border-radius:6px; aspect-ratio:5/4; }
+#ppt-material-lab .ml-card-name { display:block; padding:7px 4px 3px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; font-size:12px; }
+#ppt-material-lab .ml-card-bottom { display:flex; align-items:center; justify-content:space-between; gap:4px; padding-left:4px; }
+#ppt-material-lab .ml-card-bottom .ml-note { font-size:10px; }
+#ppt-material-lab .ml-library-detail { min-width:0; display:flex; flex-direction:column; gap:12px; }
+#ppt-material-lab .ml-library-detail canvas { width:100%; border-radius:9px; aspect-ratio:5/4; }
+#ppt-material-lab #ml-library-selection { font-size:15px; overflow-wrap:anywhere; }
+#ppt-material-lab .ml-library-empty { grid-column:1/-1; padding:40px 10px; color:var(--ml-muted); font-size:12px; text-align:center; }
+#ppt-material-lab #ml-library-message { height:28px; min-height:28px; overflow:auto; font-size:12px; color:var(--ml-muted); }
+#ppt-material-lab #ml-library-message button { border:0; background:transparent; color:var(--ml-accent); }
+#ppt-material-lab #ml-save-dialog { width:min(400px,calc(100vw - 28px)); padding:22px; }
+#ppt-material-lab #ml-save-dialog h3 { font-size:16px; font-weight:500; margin:0 0 16px; }
+#ppt-material-lab #ml-save-name { width:100%; }
+#ppt-material-lab #ml-save-error { height:36px; margin:8px 0; color:#c64747; font-size:12px; }
+@media(max-width:640px){
+ #ppt-material-lab[data-hosted="true"] .ml-workspace { display:block; overflow-y:auto; scrollbar-gutter:stable; }
+ #ppt-material-lab[data-hosted="true"] .ml-preview-column,#ppt-material-lab[data-hosted="true"] .ml-controls { overflow:visible; padding:0; }
+ #ppt-material-lab #ml-host-target { max-width:100%; }
+ #ppt-material-lab #ml-host-status { width:100px; }
+ #ppt-material-lab .ml-library-body { grid-template-columns:1fr; }
+ #ppt-material-lab .ml-library-detail { flex-direction:row; align-items:center; gap:10px; flex-wrap:wrap; }
+ #ppt-material-lab .ml-library-detail canvas { display:none; }
+ #ppt-material-lab #ml-library-selection { flex:1; font-size:12px; }
+ #ppt-material-lab .ml-preview-footer .ml-note { display:none; }
+ #ppt-material-lab .ml-preset-toolbar { gap:5px; }
+}
+/* Fast access and a single, direct-action library grid. */
+#ppt-material-lab .ml-quick-presets { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:9px; margin-top:14px; }
+#ppt-material-lab .ml-quick-preset { min-width:0; padding:3px; border:1px solid transparent; border-radius:8px; background:transparent; color:var(--ml-muted); }
+#ppt-material-lab .ml-quick-preset canvas { width:100%; height:auto; max-height:none; object-fit:contain; border-radius:6px; aspect-ratio:5/4; }
+#ppt-material-lab .ml-quick-preset span { display:block; margin-top:5px; font-size:11px; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+#ppt-material-lab .ml-quick-preset[aria-pressed="true"] { border-color:var(--ml-accent); color:var(--ml-text); }
+#ppt-material-lab .ml-quick-preset:hover { background:var(--ml-hover); }
+#ppt-material-lab .ml-library-body { display:flex; }
+#ppt-material-lab .ml-library-grid { flex:1; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; }
+#ppt-material-lab .ml-library-card { padding:8px; border-radius:12px; display:flex; flex-direction:column; }
+#ppt-material-lab .ml-library-card[data-selected="true"] { box-shadow:none; border-color:var(--ml-line); }
+#ppt-material-lab .ml-library-card canvas { border-radius:8px; }
+#ppt-material-lab .ml-card-name { font-size:13px; padding:9px 2px 4px; }
+#ppt-material-lab .ml-card-use { width:100%; margin-top:10px; min-height:33px; padding:6px 10px; border:1px solid var(--ml-line); border-radius:18px; background:transparent; color:var(--ml-text); font-size:12px; transition:background-color .12s,color .12s,border-color .12s; }
+#ppt-material-lab .ml-card-use:hover,#ppt-material-lab .ml-card-use:focus-visible { background:var(--ml-hover); color:var(--ml-accent); border-color:var(--ml-accent); }
+#ppt-material-lab .ml-record-menu { position:fixed; z-index:55; display:flex; flex-direction:column; width:150px; padding:5px; background:var(--ml-paper); border:1px solid var(--ml-line); border-radius:9px; box-shadow:0 8px 28px #0002; }
+#ppt-material-lab .ml-record-menu button { text-align:left; border:0; color:var(--ml-text); background:transparent; border-radius:5px; padding:8px 10px; font-size:12px; }
+#ppt-material-lab .ml-record-menu button:hover,#ppt-material-lab .ml-record-menu button:focus-visible { background:var(--ml-hover); }
+@media(max-width:640px){#ppt-material-lab .ml-library-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;}}
+
+#ppt-material-lab .ml-export-button { background:transparent; min-height:26px; padding:3px 7px; font-size:11px; }
+#ppt-material-lab .ml-preview-bar { min-height:28px; }
+#ppt-material-lab .ml-quick-presets { border-top:1px solid var(--ml-line); padding-top:12px; margin-top:10px; }
+#ppt-material-lab .ml-preset-toolbar { margin:12px 0 0; }
+
+/* Compact library navigation and persistent panel visibility choices. */
+#ppt-material-lab .ml-library-shell { gap:12px; }
+#ppt-material-lab .ml-library-header { display:flex; align-items:center; gap:18px; min-width:0; }
+#ppt-material-lab .ml-library-header > .ml-actions { margin-left:auto; flex-shrink:0; }
+#ppt-material-lab .ml-library-title { white-space:nowrap; font-size:16px; }
+#ppt-material-lab .ml-library-types { gap:4px; padding:3px; border-radius:8px; background:var(--ml-panel); }
+#ppt-material-lab .ml-library-types button { flex:none; min-height:30px; padding:4px 12px; font-size:12px; border-color:transparent; }
+#ppt-material-lab .ml-library-tools { position:relative; display:flex; align-items:center; gap:8px; }
+#ppt-material-lab #ml-library-search { flex:1; min-width:0; width:100%; height:34px; padding:6px 10px; border:1px solid var(--ml-line); border-radius:7px; color:var(--ml-text); background:var(--ml-panel); font-size:12px; }
+#ppt-material-lab .ml-library-tools > .ml-select-button { flex:0 0 134px;width:134px;height:34px;font-size:12px; }
+#ppt-material-lab .ml-panel-choice { min-height:28px;padding:3px 6px;border:1px solid var(--ml-line);border-radius:6px;background:transparent;color:var(--ml-muted);font-size:11px;white-space:nowrap;transition:color .18s,background-color .18s,border-color .18s; }
+#ppt-material-lab .ml-panel-choice:hover,#ppt-material-lab .ml-panel-choice[aria-pressed="true"] { color:var(--ml-accent);border-color:var(--ml-accent);background:var(--ml-hover); }
+#ppt-material-lab .ml-panel-choice:focus-visible { outline:2px solid var(--ml-accent);outline-offset:2px; }
+#ppt-material-lab .ml-library-footer { display:flex;align-items:center;gap:12px;min-width:0; }
+#ppt-material-lab #ml-library-panel-count { flex-shrink:0;font-size:11px; }
+#ppt-material-lab .ml-library-footer #ml-library-message { flex:1;min-width:0; }
+#ppt-material-lab .ml-quick-presets:empty { display:none; }
+@media(max-width:640px){
+ #ppt-material-lab .ml-library-header { gap:8px; flex-wrap:wrap; }
+ #ppt-material-lab .ml-library-header .ml-library-types { order:3; width:100%; }
+ #ppt-material-lab .ml-library-types button { flex:1; }
+}
+
+/* Color and shadow feedback never animate layout or the slider value itself. */
+#ppt-material-lab { --ml-ease:cubic-bezier(.22,1,.36,1); }
+#ppt-material-lab button:not([data-handle]):not(#ml-blur-ring),
+#ppt-material-lab details summary,#ppt-material-lab input[type="checkbox"],
+#ppt-material-lab .ml-layer-row,#ppt-material-lab .ml-number {
+ transition:background-color 180ms var(--ml-ease),border-color 180ms var(--ml-ease),color 180ms var(--ml-ease),box-shadow 180ms var(--ml-ease),opacity 180ms var(--ml-ease);
+}
+#ppt-material-lab details summary::before,#ppt-material-lab .ml-select-button::after { transition:transform 200ms var(--ml-ease); }
+#ppt-material-lab .ml-select-button[aria-expanded="true"]::after { transform:rotate(225deg); }
+#ppt-material-lab input[type="range"]::-webkit-slider-thumb { transition:box-shadow 180ms var(--ml-ease),background-color 180ms var(--ml-ease); }
+#ppt-material-lab input[type="range"]:active::-webkit-slider-thumb { box-shadow:0 0 0 5px color-mix(in srgb,var(--ml-accent) 18%,transparent); }
+@media(prefers-reduced-motion:reduce){
+ #ppt-material-lab *,#ppt-material-lab *::before,#ppt-material-lab *::after { transition:none!important;animation:none!important; }
+ #ppt-material-lab input[type="range"]::-webkit-slider-thumb { transition:none!important; }
+}
+
+/* Brand orange is reserved for small focal accents; surfaces stay neutral. */
+#ppt-material-lab {
+ --ml-accent:#ff5500;
+ --ml-accent-text:var(--ml-accent);
+ --ml-panel:light-dark(#f5f4f2,#282623);
+ --ml-paper:light-dark(#fdfcfb,#1c1b19);
+ --ml-line:light-dark(#e1ddd8,#44403b);
+ --ml-text:light-dark(#302b27,#f2efeb);
+ --ml-muted:light-dark(#78716b,#b8b0a7);
+ --ml-hover:light-dark(#fff2e9,#352820);
+ --ml-selected:light-dark(#fff0e5,#39291f);
+ --ml-on-selected:var(--ml-accent-text);
+ --ml-track:light-dark(#88817a,#a49b91);
+}
+#ppt-material-lab .ml-primary { background:var(--ml-accent);color:#fff;border-color:transparent; }
+#ppt-material-lab .ml-primary:hover { background:light-dark(#f56620,#ff7029); }
+
+#ppt-material-lab .ml-layer-row[data-selected="true"] { border-color:light-dark(#f0c5ab,#815138);background:var(--ml-selected); }
+#ppt-material-lab .ml-layer-row[data-drop="before"]::before,#ppt-material-lab .ml-layer-row[data-drop="after"]::after { background:var(--ml-accent); }
+#ppt-material-lab button:focus-visible { outline-color:var(--ml-accent); }
+#ppt-material-lab .ml-layer-undo button,#ppt-material-lab #ml-library-message button,
+#ppt-material-lab details summary:hover,#ppt-material-lab .ml-card-use:hover,#ppt-material-lab .ml-card-use:focus-visible { color:var(--ml-accent-text); }
+#ppt-material-lab input[type="range"]::-webkit-slider-runnable-track { background:linear-gradient(to right,var(--ml-track) var(--ml-range-progress,0%),var(--ml-line) var(--ml-range-progress,0%)); }
+#ppt-material-lab input[type="range"]::-webkit-slider-thumb { background:var(--ml-track);box-shadow:0 0 0 1px var(--ml-track); }
+#ppt-material-lab input[type="range"]:hover::-webkit-slider-thumb,#ppt-material-lab input[type="range"]:focus-visible::-webkit-slider-thumb { background:var(--ml-accent);box-shadow:0 0 0 4px #ff55001c; }
+#ppt-material-lab input[type="range"]:active::-webkit-slider-thumb { background:var(--ml-accent);box-shadow:0 0 0 5px #ff55002b; }
+#ppt-material-lab .ml-gizmo-box { border:1px solid #70a5ff;box-shadow:0 0 0 1px #10182755; }
+#ppt-material-lab .ml-gizmo-handle::after { background:#f7faff;border-color:#5387dc; }
+#ppt-material-lab .ml-gizmo-handle[data-handle="move"] { color:#f3f7ff;border-color:#789ed2;background:#182638ed; }
+#ppt-material-lab .ml-blur-ring::before { background:conic-gradient(#89b9ff 0deg var(--ml-blur-angle),#a4b8d438 var(--ml-blur-angle) 360deg); }
+#ppt-material-lab .ml-blur-ring::after { background:#f7fbff;box-shadow:0 0 0 1px #547eb5; }
+#ppt-material-lab .ml-blur-ring:focus-visible { outline-color:#b8d4ff; }
+html[data-material-hosted="true"],html[data-material-hosted="true"] body { background:light-dark(#fdfcfb,#1c1b19); }
+
+/* One moving selection surface instead of independently flashing tab backgrounds. */
+#ppt-material-lab .ml-modes { position:relative; isolation:isolate; }
+#ppt-material-lab .ml-modes::before {
+ content:""; position:absolute; pointer-events:none; z-index:0;
+ left:3px; top:3px; bottom:3px; width:calc(50% - 6px);
+ border-radius:8px; background:var(--ml-paper);
+ box-shadow:0 1px 4px #25170c12,inset 0 0 0 1px var(--ml-line);
+ transform:translateX(0); transition:transform 280ms var(--ml-ease);
+}
+#ppt-material-lab .ml-modes[data-selected="glass"]::before { transform:translateX(calc(100% + 6px)); }
+#ppt-material-lab .ml-mode { position:relative; z-index:1; }
+#ppt-material-lab .ml-mode[aria-selected="true"] { background:transparent;box-shadow:none;color:var(--ml-accent-text); }
+
+/* Shared selected text and segmented motion in the editor and preset library. */
+#ppt-material-lab .ml-layer-pick[aria-pressed="true"],
+#ppt-material-lab .ml-quick-preset[aria-pressed="true"],
+#ppt-material-lab .ml-select-menu button[aria-selected="true"],
+#ppt-material-lab .ml-library-card[data-selected="true"] .ml-card-name,
+#ppt-material-lab .ml-preset[aria-pressed="true"] { color:var(--ml-accent); }
+#ppt-material-lab :is(.ml-modes,.ml-library-types) { --ml-segment-gap:6px;position:relative;isolation:isolate; }
+#ppt-material-lab .ml-library-types { --ml-segment-gap:4px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr)); }
+#ppt-material-lab :is(.ml-modes,.ml-library-types)::before {
+ content:"";position:absolute;pointer-events:none;z-index:0;
+ left:3px;top:3px;bottom:3px;width:calc((100% - 6px - var(--ml-segment-gap)) / 2);
+ border-radius:8px;background:var(--ml-paper);
+ box-shadow:0 1px 4px #25170c12,inset 0 0 0 1px var(--ml-line);
+ transform:translateX(0);transition:transform 280ms var(--ml-ease);
+}
+#ppt-material-lab :is(.ml-modes,.ml-library-types)[data-selected="glass"]::before { transform:translateX(calc(100% + var(--ml-segment-gap))); }
+#ppt-material-lab .ml-library-types button { position:relative;z-index:1;min-width:0; }
+#ppt-material-lab .ml-library-types button[aria-pressed="true"] { background:transparent;box-shadow:none;color:var(--ml-accent); }
+
+#ppt-material-lab .ml-layer-pick,
+#ppt-material-lab .ml-layer-pick:hover,
+#ppt-material-lab .ml-layer-pick:active { background:transparent;box-shadow:none; }
+
+#ppt-material-lab[data-hosted="true"] .ml-stage { margin-inline:auto;width:100%; }
+#ppt-material-lab .ml-label { column-gap:8px; }
+@media(min-width:641px) and (max-height:740px){
+ html[data-material-hosted="true"] body { padding:12px; }
+ #ppt-material-lab[data-hosted="true"] .ml-workspace { gap:18px; }
+ #ppt-material-lab[data-hosted="true"] .ml-preview-bar { margin-bottom:6px; }
+ #ppt-material-lab[data-hosted="true"] .ml-quick-presets { margin-top:8px;padding-top:8px; }
+}
+
+@media(min-width:641px) and (max-height:650px){
+ #ppt-material-lab[data-hosted="true"] .ml-quick-preset canvas { max-width:100px;margin-inline:auto; }
+ #ppt-material-lab[data-hosted="true"] .ml-controls .ml-field { margin-bottom:6px; }
+ #ppt-material-lab[data-hosted="true"] .ml-controls details { margin-block:10px; }
+}
+
+/* The same live editor is hosted in either the floating shell or Office's task pane. */
+html[data-panel-mode="docked"] body { padding:12px; }
+#ppt-material-lab [hidden] { display:none!important; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-panel { padding:0 0 10px;margin-bottom:10px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-panel > .ml-row { flex-wrap:wrap;gap:8px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-target { flex-basis:100%;max-width:100%;font-size:12px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-host-switches { width:100%;gap:10px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-mode { margin-left:auto; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-host-actions { gap:6px;margin-top:8px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-status { width:auto;flex:1;min-width:60px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-modes { margin-bottom:14px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-mode { padding:9px 6px;min-height:36px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-workspace { display:flex;flex-direction:column;overflow:hidden;gap:0;scrollbar-gutter:auto; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) :is(.ml-preview-column,.ml-controls) { position:static;overflow:visible;padding:0;min-height:0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-controls { margin-top:16px;padding-bottom:16px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-stage { max-width:min(100%,360px,max(150px,calc((100dvh - 430px)*1.25)))!important;margin-inline:auto; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-preview-column { flex:0 0 auto;align-self:stretch;padding-right:5px;padding-bottom:4px;border-bottom:1px solid var(--ml-line); }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-docked-scroll { flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-gutter:stable;padding-right:14px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-docked-scroll .ml-quick-presets { border-top:0;margin-top:10px;padding-top:0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"])[data-preview-collapsed="true"] .ml-stage { display:none; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-preview-bar { gap:4px;flex-wrap:wrap; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-preview-bar .ml-actions { gap:6px;flex-wrap:wrap; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-action { font-size:12px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-preset-toolbar { gap:5px;margin:10px 0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-quick-presets { grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:8px;padding-top:8px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-quick-preset canvas { max-width:110px;margin-inline:auto; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-status:empty { min-height:0;height:0;margin:0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-grid { gap:0 10px;grid-template-columns:repeat(2,minmax(0,1fr)); }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-field { min-width:0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-layer-card { padding:10px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-library-shell { padding:12px;gap:10px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-library-header { flex-wrap:wrap;gap:8px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-library-header .ml-library-types { order:3;width:100%; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-library-body { display:block;overflow:hidden;min-height:0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-library-grid { height:100%;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px; }
+@media(max-width:350px){
+ #ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-library-grid { grid-template-columns:1fr; }
+ #ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-grid { grid-template-columns:1fr; }
+ #ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-preset-toolbar { flex-wrap:wrap; }
+ #ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-current-preset { flex-basis:100%; }
+}
+
+/* Compact editor: fixed preview, one scrolling parameter surface in either host. */
+html[data-material-hosted="true"] body { box-sizing:border-box;padding:10px; }
+html[data-material-hosted="true"] main { max-width:none; }
+#ppt-material-lab[data-hosted="true"] #ml-host-panel { padding-bottom:8px;margin-bottom:8px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-panel > .ml-row { display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-target { min-width:0;flex-basis:auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px; }
+#ppt-material-lab[data-hosted="true"] .ml-host-switches { width:auto;gap:8px; }
+#ppt-material-lab[data-hosted="true"] .ml-host-actions { margin-top:6px;gap:6px;flex-wrap:nowrap; }
+#ppt-material-lab[data-hosted="true"] #ml-host-status { min-width:0;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;width:auto; }
+#ppt-material-lab[data-hosted="true"] .ml-action { min-height:28px;padding:4px 8px;font-size:12px; }
+#ppt-material-lab[data-hosted="true"] .ml-check { font-size:12px; }
+#ppt-material-lab[data-hosted="true"] .ml-modes { margin-bottom:8px;padding:4px; }
+#ppt-material-lab[data-hosted="true"] .ml-mode { min-height:30px;padding:5px 6px; }
+#ppt-material-lab[data-hosted="true"] .ml-preview-bar { min-height:28px;margin-bottom:6px;flex-wrap:nowrap; }
+#ppt-material-lab[data-hosted="true"] .ml-preview-bar .ml-actions { flex-wrap:nowrap;gap:6px; }
+#ppt-material-lab[data-hosted="true"] #ml-preview-toggle { display:none!important; }
+#ppt-material-lab[data-hosted="true"] .ml-preset-toolbar { display:flex;flex-wrap:nowrap;gap:6px;margin:6px 0; }
+#ppt-material-lab[data-hosted="true"] #ml-current-preset { flex:1;min-width:0;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+#ppt-material-lab[data-hosted="true"] .ml-preset-toolbar button { flex-shrink:0; }
+#ppt-material-lab .ml-quick-presets { display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;height:64px;padding:4px 0;margin:6px 0;border:0; }
+#ppt-material-lab .ml-quick-preset { min-width:0;padding:2px; }
+#ppt-material-lab .ml-quick-preset canvas { width:100%;max-width:45px;height:36px;object-fit:contain;margin-inline:auto; }
+#ppt-material-lab .ml-quick-preset span { display:block;font-size:11px;line-height:16px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-docked-scroll .ml-quick-presets { margin:4px 0;padding-top:4px;border:0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-quick-preset canvas { max-width:45px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) .ml-stage { max-width:min(100%,400px,max(125px,calc(52.5vh - 150px)))!important;max-width:min(100%,400px,max(125px,calc(52.5dvh - 150px)))!important; }
+#ppt-material-lab[data-hosted="true"] .ml-controls { margin-top:8px; }
+#ppt-material-lab[data-hosted="true"] .ml-layer-list { max-height:none;overflow:visible;overscroll-behavior:auto;scrollbar-gutter:auto;margin:0;padding:2px; }
+#ppt-material-lab[data-hosted="true"] .ml-controls .ml-field { margin-bottom:10px; }
+#ppt-material-lab[data-hosted="true"] .ml-controls details { margin-block:10px; }
+#ppt-material-lab[data-hosted="true"] #ml-status { position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:90;max-width:calc(100vw - 28px);padding:7px 12px;margin:0;border:1px solid var(--ml-line);border-radius:8px;background:var(--ml-paper);box-shadow:0 3px 15px #0002;pointer-events:none;font-size:12px; }
+#ppt-material-lab[data-hosted="true"] #ml-status:empty { display:none; }
+#ppt-material-lab[data-hosted="true"] .ml-preview-column { overflow:hidden; }
+#ppt-material-lab .ml-tooltip { position:fixed;z-index:120;left:0;top:0;width:max-content;max-width:min(260px,calc(100vw - 16px));padding:7px 10px;border:1px solid var(--ml-line);border-radius:8px;background:var(--ml-paper);color:var(--ml-text);font-size:12px;line-height:1.5;overflow-wrap:anywhere;box-shadow:0 4px 16px #00000014;pointer-events:none;animation:ml-tooltip-in .15s ease-out; }
+@keyframes ml-tooltip-in { from { opacity:0; } to { opacity:1; } }
+@media(prefers-reduced-motion:reduce){ #ppt-material-lab .ml-tooltip { animation:none; } }
+#ppt-material-lab[data-hosted="true"][data-panel-mode="floating"]:not([data-stacked="true"]) .ml-quick-presets { grid-template-columns:repeat(3,minmax(0,1fr));height:auto;gap:8px;margin:8px 0; }
+#ppt-material-lab[data-hosted="true"][data-panel-mode="floating"]:not([data-stacked="true"]) .ml-quick-preset { padding:6px; }
+#ppt-material-lab[data-hosted="true"][data-panel-mode="floating"]:not([data-stacked="true"]) .ml-quick-preset canvas { width:100%;max-width:104px;height:auto;aspect-ratio:5/4; }
+#ppt-material-lab[data-hosted="true"][data-panel-mode="floating"]:not([data-stacked="true"]) .ml-quick-preset span { font-size:12px;line-height:18px; }
+@media(max-width:380px){
+ #ppt-material-lab[data-hosted="true"] .ml-host-actions { gap:4px; }
+ #ppt-material-lab[data-hosted="true"] #ml-host-status { max-width:74px; }
+}
+
+/* Rotation geometry; the shared warm-neutral palette is applied below. */
+#ppt-material-lab .ml-gizmo-box { transform-origin:center; }
+#ppt-material-lab .ml-gizmo-handle[data-handle="rotate"] { width:24px;height:24px;margin:-12px;background:#182638ed;color:#e2eeff;border:1px solid #89b0e8;border-radius:50%;box-shadow:0 2px 8px #0005;cursor:grab;z-index:4; }
+#ppt-material-lab .ml-gizmo-handle[data-handle="rotate"]::after { display:none; }
+#ppt-material-lab .ml-gizmo-handle[data-handle="rotate"] svg { width:16px;height:16px;display:block;margin:auto; }
+#ppt-material-lab .ml-gizmo-handle:focus-visible { outline:2px solid #b7d6ff;outline-offset:2px; }
+#ppt-material-lab .ml-select-menu.ml-blend-menu { min-width:230px; }
+#ppt-material-lab .ml-blend-menu .ml-menu-group { border-top:1px solid var(--ml-line);margin-top:4px;padding-top:8px; }
+
+/* All editor and dialog scrollbars: subdued 4px thumb, full 10px hit area. */
+#ppt-material-lab { --ml-scroll-thumb:light-dark(#d7d3cd,#4e4943);--ml-scroll-hover:light-dark(#b6aea5,#756d63);--ml-scroll-active:light-dark(#9f978e,#91887d); }
+#ppt-material-lab *,#ppt-material-lab .ml-select-menu.ml-blend-menu { scrollbar-width:auto;scrollbar-color:auto; }
+#ppt-material-lab *::-webkit-scrollbar { width:10px;height:10px; }
+#ppt-material-lab *::-webkit-scrollbar-track { background:transparent; }
+#ppt-material-lab *::-webkit-scrollbar-thumb { background:var(--ml-scroll-thumb);border:3px solid transparent;background-clip:padding-box;border-radius:10px;min-height:28px; }
+#ppt-material-lab *::-webkit-scrollbar-thumb:hover { background:var(--ml-scroll-hover);background-clip:padding-box; }
+#ppt-material-lab *::-webkit-scrollbar-thumb:active { background:var(--ml-scroll-active);background-clip:padding-box; }
+#ppt-material-lab *::-webkit-scrollbar-button { display:none;width:0;height:0; }
+#ppt-material-lab *::-webkit-scrollbar-button:single-button { display:none;width:0;height:0; }
+#ppt-material-lab *::-webkit-scrollbar-corner { background:transparent; }
+#ppt-material-lab .ml-select-menu { overscroll-behavior:contain; }
+@supports not selector(::-webkit-scrollbar){#ppt-material-lab * { scrollbar-width:thin;scrollbar-color:var(--ml-scroll-thumb) transparent; }#ppt-material-lab *:hover { scrollbar-color:var(--ml-scroll-hover) transparent; }}
+
+#ppt-material-lab input[type="color"] { appearance:none;width:30px;height:30px;padding:0;border:0;border-radius:6px;background:transparent;overflow:hidden; }
+#ppt-material-lab input[type="color"]::-webkit-color-swatch-wrapper { padding:0; }
+#ppt-material-lab input[type="color"]::-webkit-color-swatch { border:1px solid color-mix(in srgb,var(--ml-text) 22%,transparent);border-radius:6px; }
+#ppt-material-lab input[type="color"]::-moz-color-swatch { border:1px solid var(--ml-line);border-radius:6px; }
+#ppt-material-lab input[type="color"]:focus-visible { outline:2px solid var(--ml-accent);outline-offset:3px; }
+
+#ppt-material-lab .ml-gizmo-box { border-color:#eee7df;box-shadow:0 0 0 1px #30271f88; }
+#ppt-material-lab .ml-gizmo-handle::after { background:#fffaf5;border-color:#8d8075; }
+#ppt-material-lab .ml-gizmo-handle[data-handle="move"],#ppt-material-lab .ml-gizmo-handle[data-handle="rotate"] { background:#302a25ed;color:#fffaf4;border-color:#b5a89b; }
+#ppt-material-lab .ml-gizmo-handle:focus-visible { outline-color:#ff8b50; }
+#ppt-material-lab .ml-gizmo-handle:hover::after,#ppt-material-lab .ml-overlay[data-dragging="true"] .ml-gizmo-handle::after { border-color:#ff5500; }
+#ppt-material-lab .ml-gizmo-handle[data-handle="move"]:hover,#ppt-material-lab .ml-gizmo-handle[data-handle="rotate"]:hover { border-color:#ff8850; }
+#ppt-material-lab .ml-blur-ring::before { background:conic-gradient(#ff955f 0deg var(--ml-blur-angle),#b5a89b66 var(--ml-blur-angle) 360deg);mask:radial-gradient(circle at center,transparent 25px,#000 26px 28px,transparent 29px); }
+#ppt-material-lab .ml-blur-ring::after { background:#fffaf5;box-shadow:0 0 0 1px #aa6b47; }
+#ppt-material-lab .ml-blur-ring:focus-visible { outline-color:#ff955f; }
+#ppt-material-lab .ml-modes::before { transition-duration:170ms; }
+#ppt-material-lab details[data-expanded="false"] summary::before { transform:rotate(-45deg); }
+#ppt-material-lab details[data-expanded="true"] summary::before { transform:rotate(45deg); }
+#ppt-material-lab details summary::before { transition-duration:180ms; }
+
+/* Fixed action footer is a flex sibling: it never covers the scrolling editor. */
+#ppt-material-lab .ml-brand-name { font-size:15px;font-weight:600;white-space:nowrap; }
+#ppt-material-lab .ml-preview-context { display:flex;gap:6px;align-items:center; }
+#ppt-material-lab[data-hosted="true"] #ml-host-capture { background:transparent;border-color:transparent;color:var(--ml-muted);padding-inline:5px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-capture:hover { background:var(--ml-hover);color:var(--ml-accent); }
+#ppt-material-lab #ml-host-footer { flex:0 0 auto;display:flex;align-items:center;gap:16px;border-top:1px solid var(--ml-line);padding:10px 0 0;margin-top:8px;background:var(--ml-paper); }
+#ppt-material-lab #ml-host-footer .ml-target-status { min-width:0;flex:1;display:flex;flex-direction:column;gap:3px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-target { max-width:100%;font-size:12px;font-weight:400; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-status { width:auto;max-width:none;margin:0;text-align:left;font-size:11px;color:var(--ml-muted);line-height:18px;min-height:18px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-status[role="alert"] { color:light-dark(#ad3021,#ffb4a3); }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer .ml-host-actions { margin:0;gap:8px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-apply { min-height:36px;padding:7px 16px;white-space:nowrap; }
+#ppt-material-lab[data-hosted="true"] #ml-status { bottom:90px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer { flex-wrap:wrap;gap:7px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer .ml-target-status { flex-basis:100%;flex-direction:row;justify-content:space-between;gap:8px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer #ml-host-target { flex:1; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer #ml-host-status { flex:0 1 auto; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer .ml-host-actions { width:100%; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer #ml-host-apply { flex:1; }
+#ppt-material-lab[data-hosted="true"] .ml-preview-bar { flex-wrap:wrap; }
+#ppt-material-lab[data-hosted="true"] .ml-preview-bar .ml-actions { margin-left:auto; }
+
+/* Preset actions and compact library metadata. */
+#ppt-material-lab[data-hosted="true"] #ml-host-capture { background:var(--ml-hover);border-color:light-dark(#ffd0b7,#75442d);color:var(--ml-accent); }
+#ppt-material-lab[data-hosted="true"] #ml-host-capture:hover { background:light-dark(#ffe4d3,#4b3021);border-color:var(--ml-accent); }
+#ppt-material-lab .ml-card-bottom { min-width:0;gap:5px;padding:0;margin-top:6px; }
+#ppt-material-lab .ml-card-bottom .ml-card-name { flex:1;min-width:0;padding:0;font-size:13px; }
+#ppt-material-lab .ml-card-bottom .ml-actions { flex:0 0 auto;gap:2px;margin:0;flex-wrap:nowrap; }
+#ppt-material-lab .ml-panel-choice { width:26px;height:28px;min-height:28px;padding:5px;border:0;border-radius:6px;display:grid;place-items:center;background:transparent; }
+#ppt-material-lab .ml-panel-choice svg { width:16px;height:16px; }
+#ppt-material-lab .ml-panel-choice[aria-pressed="true"] { background:var(--ml-hover);color:var(--ml-accent); }
+#ppt-material-lab .ml-library-more { width:24px;min-width:24px; }
+#ppt-material-lab .ml-card-use { margin-top:7px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer { flex-wrap:nowrap;gap:8px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer .ml-target-status { flex:1 1 0; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer .ml-host-actions { flex:0 0 auto;width:auto;gap:5px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer #ml-host-apply { padding-inline:10px; }
+
+/* One compact navigation row; the Office/window chrome already names the plugin. */
+#ppt-material-lab .ml-topbar { display:flex;align-items:center;gap:8px;flex:0 0 auto;margin-bottom:8px;min-width:0; }
+#ppt-material-lab .ml-topbar .ml-modes { flex:1;min-width:0;margin-bottom:0; }
+#ppt-material-lab[data-hosted="true"] .ml-topbar #ml-host-panel { flex:0 0 auto;padding:0;margin:0;border:0; }
+#ppt-material-lab[data-hosted="true"] .ml-topbar .ml-host-switches { flex-wrap:nowrap;gap:8px; }
+#ppt-material-lab[data-hosted="true"] .ml-topbar .ml-host-switches .ml-check { white-space:nowrap; }
+#ppt-material-lab[data-hosted="true"] #ml-host-mode { display:grid;place-items:center;width:32px;height:32px;min-height:32px;padding:6px;background:transparent;border-color:transparent;color:var(--ml-muted); }
+#ppt-material-lab[data-hosted="true"] #ml-host-mode:hover { background:var(--ml-panel);color:var(--ml-text); }
+#ppt-material-lab #ml-host-mode svg { width:20px;height:20px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-apply { min-width:200px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer .ml-target-status { flex:0 1 90px; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer .ml-host-actions { flex:1; }
+#ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer #ml-host-apply { flex:1;min-width:150px; }
+@media(max-width:350px){
+ #ppt-material-lab .ml-topbar { gap:5px; }
+ #ppt-material-lab[data-hosted="true"] .ml-topbar .ml-host-switches { gap:5px; }
+ #ppt-material-lab:is([data-panel-mode="docked"],[data-stacked="true"]) #ml-host-footer #ml-host-apply { min-width:140px; }
+}
+
+/* Secondary actions share a quiet footer; ordinary status does not consume space. */
+#ppt-material-lab[data-hosted="true"] #ml-host-footer .ml-target-status { position:absolute;display:block;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer .ml-host-actions { flex:1;justify-content:flex-end;gap:8px; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer :is(#ml-host-restore,#ml-export-png) { min-height:36px;padding:6px 10px;font-size:12px;color:var(--ml-muted);background:transparent;border-color:transparent;white-space:nowrap; }
+#ppt-material-lab[data-hosted="true"] #ml-host-footer :is(#ml-host-restore,#ml-export-png):hover { background:var(--ml-panel);color:var(--ml-text); }
+/* Size actions by viewport width, including wide docked panels. */
+#ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-apply { flex:0 1 38%;min-width:200px;max-width:400px; }
+@media(max-width:640px){
+ #ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-apply { flex:1;min-width:0;max-width:none; }
+}
+@media(max-width:300px){
+ #ppt-material-lab[data-hosted="true"] #ml-host-footer .ml-host-actions { gap:4px; }
+ #ppt-material-lab[data-hosted="true"] #ml-host-footer :is(#ml-host-restore,#ml-export-png) { padding-inline:4px;font-size:11px; }
+ #ppt-material-lab[data-hosted="true"] #ml-host-footer #ml-host-apply { padding-inline:6px;font-size:11px; }
+}

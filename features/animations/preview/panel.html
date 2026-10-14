@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>旁门动画库</title>
+  <link rel="icon" type="image/svg+xml" href="assets/pang.svg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="numeric-motion.css">
+  <link rel="stylesheet" href="motion-engine.css">
+  <link rel="stylesheet" href="priority-motion.css">
+  <link rel="stylesheet" href="plugin-ui.css">
+  <link rel="stylesheet" href="surface.css">
+</head>
+<body>
+  <img id="preview-brand-glyph" src="assets/pang-glyph.svg" alt="" hidden>
+  <main class="app" id="app">
+    <header class="topbar">
+      <div class="mode-tabs" role="group" aria-label="动画对象">
+        <button id="mode-element" data-mode="element" aria-pressed="true">元素动画</button>
+        <button id="mode-text" data-mode="text" aria-pressed="false">文本动画</button>
+      </div>
+      <div class="panel-actions">
+        <label class="check pin-toggle" title="使用 PowerPoint 时保持面板在前方"><input type="checkbox" id="pin-toggle" checked>面板置顶</label>
+        <button class="surface-toggle" id="surface-toggle" type="button" aria-label="停靠到右侧"></button>
+      </div>
+    </header>
+
+    <nav class="category-nav" aria-label="动画分类">
+      <button id="category-entrance" data-category="entrance" aria-pressed="true"><span class="category-dot entrance"></span>进入 <span class="category-count"></span></button>
+      <button id="category-emphasis" data-category="emphasis" aria-pressed="false"><span class="category-dot emphasis"></span>强调 <span class="category-count"></span></button>
+      <button id="category-loop" data-category="loop" aria-pressed="false"><span class="category-dot loop"></span>循环 <span class="category-count"></span></button>
+      <button id="category-exit" data-category="exit" aria-pressed="false"><span class="category-dot exit"></span>退出 <span class="category-count"></span></button>
+      <span hidden class="nav-note" id="category-description">让内容以恰好的节奏登场</span>
+    </nav>
+
+    <div class="workspace">
+      <aside class="library" aria-label="动画样式库">
+        <div class="section-heading"><h1>动画样式</h1><span id="library-count">正在载入</span></div>
+        <label class="search-field"><span class="sr-only">搜索动画样式</span><input id="effect-search" type="search" placeholder="搜索当前分类" autocomplete="off"></label>
+        <div id="effect-grid" class="effect-grid" aria-label="动画样式"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div>
+        <p class="empty-state" id="empty-state" hidden>没有找到匹配的样式。<button id="clear-search" class="text-button">清除筛选</button></p>
+        <div class="library-foot"><span class="foot-dot"></span><span id="total-count">效果库正在载入</span></div>
+      </aside>
+
+      <section class="preview-column" aria-label="动画预览">
+        <div class="preview-heading">
+          <div><div hidden class="eyebrow" id="effect-meta">ELEMENT / ENTRANCE</div><h2 id="effect-name">轰然坠落</h2></div>
+        </div>
+        <p id="effect-description" class="effect-description">正在准备预览…</p>
+        <div class="stage-toolbar"><span>效果预览</span></div>
+        <div class="stage-shell" data-background="dark" id="stage-shell">
+          <div class="stage-corner top-left"></div><div class="stage-corner bottom-right"></div>
+          <div class="motion-stage" id="motion-stage" aria-label="当前动画画布"></div>
+
+          <span class="stage-state" id="stage-state">就绪</span>
+        </div>
+        <div class="transport">
+          <div class="transport-buttons"><button class="button primary" id="play-toggle">播放</button></div>
+          <span class="timecode"><b id="current-time">0.00</b> <span>/</span> <span id="total-time">1.20 s</span></span>
+        </div>
+        <label class="timeline-label"><span class="sr-only">播放进度</span><input type="range" id="timeline" min="0" max="1000" value="0" step="1"></label>
+        <div class="timeline-ticks"><span>开始</span><span id="timeline-mid">0.60 s</span><span>结束</span></div>
+        <div class="apply-panel">
+          <span id="connection-dot" hidden></span><span id="selection-status" hidden>连接 PPT 后，选择元素并点击动画</span>
+          <div class="apply-controls">
+            <label class="field replace-field"><select id="replace-mode" aria-label="已有动画处理方式"><option value="replace" selected>替换动画</option><option value="preserve">保留动画</option></select></label>
+            <label class="field trigger-field"><select id="start-trigger" aria-label="开始方式"><option value="1">单击时</option><option value="2" selected>同时开始</option><option value="3">之后开始</option></select></label>
+            <button class="button primary" id="apply-animation" disabled>预览动画</button>
+          </div>
+          <p id="apply-help" hidden>请通过动画插件的启动入口连接 PowerPoint。</p>
+        </div>
+        <div hidden id="quick-effects"></div>
+      </section>
+
+      <aside class="inspector" aria-label="动画参数">
+        <div class="section-heading"><h2>动画参数</h2><button id="reset-params" class="text-button">重置</button></div>
+        <fieldset class="control-section">
+          <legend>节奏</legend>
+          <label class="range-field" for="duration"><span>动画时长<span class="pm-number-field"><input id="duration-value" type="number" aria-label="动画时长" min="0.2" max="8" step="0.01" value="1.20"><span aria-hidden="true">s</span></span></span><input id="duration" type="range" min="0.2" max="8" step="0.01" value="1.2"></label>
+          <label class="range-field" for="intensity"><span>动作幅度<span class="pm-number-field"><input id="intensity-value" type="number" aria-label="动作幅度" min="10" max="300" step="1" value="100"><span aria-hidden="true">%</span></span></span><input id="intensity" type="range" min="0.1" max="3" step="0.01" value="1"></label>
+          <label class="range-field text-only" for="stagger" hidden><span>段落 / 元素间隔<span class="pm-number-field"><input id="stagger-value" type="number" aria-label="段落 / 元素间隔" min="0" max="0.2" step="0.01" value="0.06"><span aria-hidden="true">s</span></span></span><input id="stagger" type="range" min="0" max="0.2" step="0.01" value="0.06"></label>
+          <label class="field text-only" hidden><span>文字分组</span><select id="split-select"><option value="char">逐字</option><option value="word">逐词</option></select></label>
+          <label class="range-field" id="curvature-field" for="curvature" hidden><span>弯曲程度<span class="pm-number-field"><input id="curvature-value" type="number" aria-label="弯曲程度" min="0" max="150" step="1" value="50"><span aria-hidden="true">%</span></span></span><input id="curvature" type="range" min="0" max="1.5" step=".01" value=".5"></label>
+          <label class="field" id="mark-color-field" hidden><span>标记颜色<input id="mark-color" type="color" value="#ffe066" aria-label="标记颜色"></span></label>
+          <div class="field direction-field" id="direction-field">
+            <span class="direction-heading">
+              <span id="direction-label">运动方向</span>
+              <output id="direction-value">向上 · 0°</output>
+              <label class="direction-angle-value pm-number-field" id="direction-angle-value" hidden><input id="direction-angle-number" type="number" min="0" max="359" step="1" value="0" aria-label="自由角度数值"><span>°</span></label>
+            </span>
+            <div class="direction-control direction-pad" id="direction-pad" role="radiogroup" aria-label="运动方向">
+              <button type="button" data-direction-choice="up-left" aria-label="向左上">↖</button>
+              <button type="button" data-direction-choice="up" aria-label="向上">↑</button>
+              <button type="button" data-direction-choice="up-right" aria-label="向右上">↗</button>
+              <button type="button" data-direction-choice="left" aria-label="向左">←</button>
+              <button type="button" data-direction-choice="custom" class="direction-custom direction-dial" id="direction-dial" aria-label="自由角度" aria-valuemin="0" aria-valuemax="359" aria-valuenow="0" aria-valuetext="0°">
+                <span class="direction-custom-label">自由</span>
+                <span class="direction-dial-indicator" aria-hidden="true"><span class="direction-dial-needle"></span><span class="direction-dial-handle"></span></span>
+              </button>
+              <button type="button" data-direction-choice="right" aria-label="向右">→</button>
+              <button type="button" data-direction-choice="down-left" aria-label="向左下">↙</button>
+              <button type="button" data-direction-choice="down" aria-label="向下">↓</button>
+              <button type="button" data-direction-choice="down-right" aria-label="向右下">↘</button>
+            </div>
+            <div class="direction-control direction-segment" id="direction-axis" role="radiogroup" aria-label="翻转轴向" hidden>
+              <button type="button" data-direction-choice="up" aria-label="上下翻转" title="上下翻转"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg></button><button type="button" data-direction-choice="left" aria-label="左右翻转" title="左右翻转"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M8 8l4-4 4 4M8 16l4 4 4-4" transform="rotate(90 12 12)" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+            <div class="direction-control direction-corners" id="direction-corners" role="radiogroup" aria-label="旋转支点" hidden>
+              <button type="button" data-direction-choice="top-left" aria-label="左上支点" title="左上支点"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="5" cy="5" r="3"/></svg></button><button type="button" data-direction-choice="top-right" aria-label="右上支点" title="右上支点"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="19" cy="5" r="3"/></svg></button>
+              <button type="button" data-direction-choice="bottom-left" aria-label="左下支点" title="左下支点"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="5" cy="19" r="3"/></svg></button><button type="button" data-direction-choice="bottom-right" aria-label="右下支点" title="右下支点"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"/><circle cx="19" cy="19" r="3"/></svg></button>
+            </div>
+            <div class="direction-control direction-segment" id="direction-rotation" role="radiogroup" aria-label="旋转方向" hidden>
+              <button type="button" data-direction-choice="left" aria-label="逆时针" title="逆时针"><span aria-hidden="true">↶</span></button><button type="button" data-direction-choice="right" aria-label="顺时针" title="顺时针"><span aria-hidden="true">↷</span></button>
+            </div>
+          </div>
+          <label class="check" id="dust-field"><input id="dust" type="checkbox" checked>落点尘雾</label>
+          <p hidden class="control-help" id="effect-help">调节后自动重播，随时可暂停检查。</p>
+        </fieldset>
+      </aside>
+    </div>
+    <footer hidden class="app-footer"><span>旁门动画库 <span class="muted">/</span> 让每一次出现，都恰到好处。</span><span>本地运行 · 可离线打开</span></footer>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <div id="error-banner" role="alert" hidden></div>
+  </main>
+
+  <noscript><p class="noscript">此预览需要启用 JavaScript。请使用 Edge、Chrome 或支持 JavaScript 的浏览器打开。</p></noscript>
+  <script src="catalog.js"></script>
+  <script src="native-support.js"></script>
+  <script src="numeric-motion.js"></script>
+  <script src="impact-dust.js"></script>
+  <script src="brand-card.js"></script>
+  <script src="priority-motion.js"></script>
+  <script src="motion-engine.js"></script>
+  <script src="app.js"></script>
+  <script src="native-plan.js"></script>
+  <script src="plugin-ui.js"></script>
+  <script src="surface.js"></script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>旁门动画库 · 窗口预览</title><link rel="icon" href="assets/pang.svg"><link rel="stylesheet" href="window-preview.css"></head>
+<body>
+  <header class="preview-bar">
+    <div class="preview-brand"><img src="assets/pang.svg" alt="" width="28" height="28"><div><strong>旁门动画库 · 窗口预览</strong><small>示例环境，不连接 PowerPoint</small></div></div>
+    <div class="view-switch" role="group" aria-label="窗口形式"><button data-view="floating" aria-pressed="true">悬浮窗</button><button data-view="sidebar" aria-pressed="false">侧边栏</button></div>
+    <button class="reset-window" id="reset-window">重置位置</button>
+  </header>
+  <main class="desktop" id="desktop" data-view="floating">
+    <section class="presentation" aria-label="演示文稿示例">
+      <div class="office-title"><span class="office-icon">P</span><span>动画示例.pptx</span><span class="office-saved">已保存</span></div>
+      <div class="office-ribbon" aria-hidden="true"><b>开始</b><span>插入</span><span>设计</span><span>切换</span><span>动画</span><span>幻灯片放映</span><strong>旁门动画库</strong></div>
+      <div class="office-workspace"><aside class="slides-rail" aria-hidden="true"><span>1</span><div class="mini-slide"><i></i></div><span>2</span><div class="mini-slide second"><i></i></div></aside><div class="slide-area"><article class="slide"><span class="slide-kicker">PANGMEN / MOTION DESIGN</span><h1>让内容，自然登场。</h1><p>好的动画，让每一次表达更清晰。</p><div class="selected-object"><img src="assets/pang-glyph.svg" alt="旁"><small>PANGMEN DESIGN</small><i></i><i></i><i></i><i></i></div><span class="slide-number">01 / 02</span></article></div></div>
+      <footer class="office-status"><span>幻灯片 1 / 2</span><span>100%</span></footer>
+    </section>
+    <section class="plugin-window" id="plugin-window" aria-label="动画插件预览窗口">
+      <div class="window-title" id="window-title"><span class="grip" aria-hidden="true">⠿</span><strong>旁门动画库</strong><span id="window-hint">拖动标题栏移动</span><span class="window-controls" aria-hidden="true"><i>—</i><i>□</i><i>×</i></span></div>
+      <iframe id="plugin-frame" title="动画插件交互预览"></iframe>
+    </section>
+  </main>
+  <script src="window-preview.js"></script>
+</body></html>

@@ -1,0 +1,13 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>导出 PDF · 旁门</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; object-src 'none'; base-uri 'none'">
+<link rel="stylesheet" href="pdf-export.css"></head>
+<body><main id="export-app">
+<header class="heading"><div class="heading-copy"><h1>导出 PDF</h1><p id="document-name">正在读取文稿…</p></div><span id="preview-badge" hidden>示例文稿</span></header>
+<section class="workspace" aria-label="选择导出页面">
+<div class="selection-toolbar"><div class="selection-actions"><button id="select-all">全选</button><button id="select-none">取消全选</button><button id="invert">反选</button></div><span id="selection-help">单击选择 · Ctrl 多选 · Shift 连选</span></div>
+<div id="page-grid" class="page-grid" role="listbox" aria-label="导出页面" aria-multiselectable="true" aria-describedby="selection-help"></div>
+</section>
+<div id="custom-settings" hidden><label for="dpi">分辨率 <input id="dpi" type="number" min="72" max="600" step="1" value="240"> DPI</label><label><input id="lossless" type="checkbox">无损保存</label><span id="pixel-size"></span></div>
+<footer><div class="export-status"><strong id="selection-summary">正在读取页面</strong><span id="settings-notice" role="status" aria-live="polite"></span><span id="status" role="status" aria-live="polite"></span><progress id="progress" max="100" value="0" hidden></progress></div><div class="export-actions"><label for="export-quality" class="quality-label">导出质量</label><div class="quality-picker"><button id="export-quality" type="button" value="balanced" aria-label="导出质量" aria-haspopup="listbox" aria-expanded="false" aria-controls="quality-menu"><span id="quality-value">均衡 · 推荐</span><span class="quality-chevron" aria-hidden="true"></span></button><div id="quality-menu" role="listbox" aria-label="导出质量" hidden><button type="button" role="option" data-quality="small" aria-selected="false">体积优先</button><button type="button" role="option" data-quality="balanced" aria-selected="true">均衡 · 推荐</button><button type="button" role="option" data-quality="best" aria-selected="false">画质优先</button><button type="button" role="option" data-quality="custom" aria-selected="false">自定义</button></div></div><button id="cancel" hidden>取消</button><button id="export" class="primary" disabled>导出 PDF</button></div></footer>
+</main><script src="pdf-export.js"></script></body></html>

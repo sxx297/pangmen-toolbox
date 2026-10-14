@@ -1,0 +1,60 @@
+/* Pangmen plugin controls. Shared paper, orange, typography and radius tokens. */
+[hidden]{display:none!important}
+body{padding:12px}.workspace{min-height:580px}
+.topbar{padding:12px 18px;gap:10px}.topbar .mode-tabs{flex:1;min-width:0}.top-actions{min-width:0}
+.panel-actions{display:flex;align-items:center;gap:8px;flex:none}.pin-toggle{white-space:nowrap;color:var(--ink)}
+.surface-toggle{display:grid;place-items:center;width:32px;height:32px;min-height:32px;padding:6px;border:1px solid transparent;border-radius:7px;background:transparent;color:var(--muted);flex:none}
+.surface-toggle:hover{background:var(--panel);color:var(--ink)}.surface-toggle svg{width:20px;height:20px;display:block}
+.preview-column{padding-top:22px}.effect-description{min-height:42px;margin-bottom:12px}
+.stage-corner{display:none}.stage-toolbar>span{font-size:11px}.library-foot{padding-top:14px}
+.tile-glyph{width:38px;height:38px;border:0;background:none!important;box-shadow:none;transform:none!important;border-radius:8px!important}
+.tile-glyph img{width:100%;height:100%;display:block;border-radius:7px}.tile-glyph.is-text{font-size:25px;line-height:38px;color:var(--accent);width:auto;font-weight:700}
+.tile-name{text-align:center}
+.pang-preview-card{--pang-card-inset:12%;position:relative;display:block;padding:0;container-type:inline-size;color:#fff8ef;border:1px solid #ffffff38;border-radius:14%!important;background:linear-gradient(145deg,#ffffff20,transparent 58%),#ff5500!important;overflow:hidden;box-shadow:inset 0 1px 0 #ffffff39}
+.pang-preview-card .pang-card-symbol{position:absolute;left:var(--pang-card-inset);top:16%;width:22%;height:auto;object-fit:contain;border-radius:0;background:none}
+.pang-card-detail{position:absolute;right:12%;top:14%;font:500 clamp(2px,4cqw,9px)/1.3 ui-monospace,monospace;letter-spacing:.02em;opacity:.65;white-space:nowrap}
+.pang-card-english{position:absolute;left:var(--pang-card-inset);bottom:13%;font:600 clamp(2px,4cqw,9px)/1.3 "Segoe UI",sans-serif;letter-spacing:.13em;opacity:.74;white-space:nowrap}
+.tile-glyph.pang-mini-card{width:var(--pang-thumb-size,48px);height:var(--pang-thumb-size,48px)}
+.tile-animation .me-scene{--me-size:var(--pang-thumb-size,48px)}
+.tile-animation .pm-single{width:var(--pang-thumb-size,48px);height:var(--pang-thumb-size,48px)}
+.tile-animation .mn-line{font-size:25px;font-weight:700}
+.pm-tile.pang-preview-card{aspect-ratio:1;color:#fff8ef}
+.tile-visual:before,.tile-visual:after{display:none}.tile-featured{display:none}
+.apply-panel{margin-top:22px;padding-top:18px;border-top:1px solid var(--line)}
+.apply-controls{display:flex;align-items:center;gap:10px;margin:0}.apply-controls .replace-field{flex:0 1 190px;min-width:132px;margin:0}.apply-controls .trigger-field{flex:0 1 220px;min-width:150px;margin:0}.apply-controls .primary{width:auto;min-height:38px;flex:1}
+button:disabled{opacity:.45;cursor:not-allowed;transform:none!important}.button:active:not(:disabled),.effect-tile:active{transform:scale(.98)}
+.brand-select{position:relative;min-width:0}.brand-select>button{display:flex;width:100%;align-items:center;justify-content:space-between;min-height:35px;border:1px solid var(--line);border-radius:7px;background:var(--panel);font:inherit;text-align:left;padding:7px 10px;color:var(--ink);white-space:nowrap;overflow:hidden}
+.brand-select>button::after{content:"";width:6px;height:6px;border-right:1.5px solid var(--muted);border-bottom:1.5px solid var(--muted);transform:rotate(45deg);margin:0 3px 4px 12px}
+.brand-select>button[aria-expanded=true]{border-color:var(--accent);background:var(--paper)}
+.brand-select-list{position:absolute;left:0;right:0;top:calc(100% + 5px);z-index:50;background:var(--paper);border:1px solid var(--line);padding:5px;border-radius:8px;box-shadow:0 8px 24px #302b271a;max-height:230px;overflow:auto}
+.brand-select-list button{width:100%;border:0;border-radius:5px;background:transparent;padding:8px;text-align:left;font:inherit;color:var(--ink);display:block}.brand-select-list button:hover,.brand-select-list button:focus-visible{background:var(--hover)}.brand-select-list button[aria-selected=true]{color:var(--accent);background:var(--selected)}
+.brand-tooltip{position:fixed;z-index:1000;max-width:220px;padding:9px 12px;background:var(--paper);color:var(--ink);border:1px solid var(--line);border-radius:8px;box-shadow:0 5px 20px #302b271a;font-size:12px;line-height:1.6;pointer-events:none}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.direction-field{gap:9px}.direction-field>span{margin-bottom:0}.direction-heading{display:flex;align-items:center;justify-content:space-between;min-height:32px}.direction-field output{font-size:10px;color:var(--muted);font-variant-numeric:tabular-nums}
+.direction-control button{border:1px solid var(--line);background:var(--paper);color:var(--muted);min-height:34px;font:inherit;transition:border-color .14s,background-color .14s,color .14s,transform .12s}
+.direction-control button:hover{border-color:#c9c1b9;color:var(--ink);background:var(--hover)}.direction-control button:active{transform:scale(.96)}
+.direction-control button[aria-pressed=true]{border-color:var(--accent);background:var(--selected);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.direction-pad{width:144px;display:grid;grid-template-columns:repeat(3,44px);grid-template-rows:repeat(3,44px);gap:6px;align-self:center}.direction-pad button{padding:0;border-radius:9px;font-size:19px;line-height:1}.direction-pad .direction-custom{font-size:9px;font-weight:600;letter-spacing:.05em}.direction-pad [data-direction-choice=up-left]{grid-column:1;grid-row:1}.direction-pad [data-direction-choice=up]{grid-column:2;grid-row:1}.direction-pad [data-direction-choice=up-right]{grid-column:3;grid-row:1}.direction-pad [data-direction-choice=left]{grid-column:1;grid-row:2}.direction-pad [data-direction-choice=custom]{grid-column:2;grid-row:2}.direction-pad [data-direction-choice=right]{grid-column:3;grid-row:2}.direction-pad [data-direction-choice=down-left]{grid-column:1;grid-row:3}.direction-pad [data-direction-choice=down]{grid-column:2;grid-row:3}.direction-pad [data-direction-choice=down-right]{grid-column:3;grid-row:3}
+.direction-segment{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.direction-segment button{padding:7px 8px;border-radius:7px;font-size:11px}
+.direction-corners{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.direction-corners button{padding:7px;border-radius:7px;font-size:10px}
+.direction-angle-value{display:flex;align-items:center;height:32px;border:1px solid var(--line);border-radius:7px;background:var(--panel);overflow:hidden}.direction-angle-value input{width:48px;height:30px;padding:4px 0 4px 8px;border:0;background:transparent;text-align:right;font:inherit;font-variant-numeric:tabular-nums;color:var(--ink);outline:0}.direction-angle-value span{padding:0 7px 0 3px;color:var(--muted)}
+.direction-dial{position:relative;touch-action:none;cursor:grab}.direction-dial:active{transform:none;cursor:grabbing}.direction-dial-indicator{position:absolute;inset:3px;border-radius:50%;opacity:0;transform:rotate(var(--direction-angle,0deg));transform-origin:center}.direction-dial-needle{position:absolute;left:50%;top:6px;width:2px;height:14px;border-radius:2px;background:var(--accent);transform:translateX(-50%)}.direction-dial-handle{position:absolute;left:50%;top:3px;width:7px;height:7px;border-radius:50%;background:var(--accent);transform:translateX(-50%);box-shadow:0 0 0 2px var(--paper)}.direction-dial[aria-pressed=true]{border-color:var(--line);border-radius:50%;background:linear-gradient(145deg,#f2f1ee,#e8e6e2);box-shadow:inset 0 1px 1px #fff,0 1px 2px #302b2714;color:var(--ink)}.direction-dial[aria-pressed=true] .direction-custom-label{opacity:0}.direction-dial[aria-pressed=true] .direction-dial-indicator{opacity:1}.direction-dial:focus-visible{outline-offset:3px}
+/* Match the shape-effects plugin: quiet 4px track, 12px thumb, orange on interaction. */
+input[type=range]{height:24px;min-height:24px}
+input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:5px;background:linear-gradient(to right,var(--track) var(--progress,0%),var(--line) var(--progress,0%))}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:12px;height:12px;margin-top:-4px;border:2px solid var(--paper);border-radius:50%;background:var(--track);box-shadow:0 0 0 1px var(--track);transition:box-shadow .18s,background-color .18s}
+input[type=range]:hover::-webkit-slider-thumb,input[type=range]:focus-visible::-webkit-slider-thumb{background:var(--accent);box-shadow:0 0 0 4px #ff55001c}
+input[type=range]:active::-webkit-slider-thumb{background:var(--accent);box-shadow:0 0 0 5px #ff55002b}
+#timeline::-webkit-slider-runnable-track{background:linear-gradient(to right,var(--accent) var(--progress,0%),var(--line) var(--progress,0%))}#timeline::-webkit-slider-thumb{background:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+
+/* Stable, subdued scrollbars use the same dimensions as the shape-effects plugin. */
+*::-webkit-scrollbar{width:10px;height:10px}*::-webkit-scrollbar-track{background:transparent}*::-webkit-scrollbar-thumb{background:#c7c0b9;border:3px solid transparent;background-clip:padding-box;border-radius:10px;min-height:28px}*::-webkit-scrollbar-thumb:hover{background:#aaa198;background-clip:padding-box}*::-webkit-scrollbar-thumb:active{background:#8f857b;background-clip:padding-box}*::-webkit-scrollbar-button{display:none;width:0;height:0}*::-webkit-scrollbar-corner{background:transparent}
+
+@media(max-width:680px){.preview-column{order:2}.library{order:1}.inspector{order:3}.effect-grid{max-height:290px}.workspace{min-height:0}.brand-select-list{max-height:190px}.topbar{padding:10px 12px;gap:6px}.pin-toggle{font-size:11px}.panel-actions{gap:4px}}
+
+/* Use the same two-line specimen for static and animated text thumbnails. */
+.text-thumbnail .tile-glyph.is-text,.text-thumbnail .tile-animation .me-text{font-family:Geist,"Segoe UI","Microsoft YaHei","PingFang SC",sans-serif;font-size:var(--pang-text-size,13px);line-height:1.52;font-weight:700;letter-spacing:0;text-align:center}
+.text-thumbnail .tile-glyph.is-text{height:auto;white-space:pre-line}
+.text-thumbnail .tile-animation .me-text{display:block}
+body[data-surface=floating] .library{--pang-text-size:14px}
+body[data-surface=sidebar] .library{--pang-text-size:12px}

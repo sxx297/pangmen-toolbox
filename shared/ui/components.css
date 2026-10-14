@@ -1,0 +1,127 @@
+/* Shared host UI. Preview artwork and rendered slide content keep their own typography. */
+:root{--paper:var(--pm-paper);--ink:var(--pm-ink);--muted:var(--pm-muted);--line:var(--pm-line);--accent:var(--pm-accent);font-family:var(--pm-font),"Segoe UI",sans-serif;color:var(--pm-ink)}
+#ppt-material-lab{--ml-paper:var(--pm-paper);--ml-ink:var(--pm-ink);--ml-muted:var(--pm-muted);--ml-line:var(--pm-line);--ml-accent:var(--pm-accent);--ml-scroll-thumb:var(--pm-scroll);--ml-scroll-hover:var(--pm-scroll-hover);--ml-scroll-active:var(--pm-scroll-active);font-family:var(--pm-font),"Segoe UI",sans-serif;font-size:var(--pm-body)}
+body[data-surface],#export-app{font-family:var(--pm-font),"Segoe UI",sans-serif;font-size:var(--pm-body);color:var(--pm-ink);background:var(--pm-paper)}
+body[data-surface] .preview-heading h2,#export-app h1{font-size:var(--pm-title);font-weight:600;line-height:1.4}
+body[data-surface] .section-heading h2,body[data-surface] .section-heading h3,#ppt-material-lab .ml-section-title{font-size:var(--pm-section);font-weight:600;color:var(--pm-ink)}
+body[data-surface] :is(.range-field>span,.field,.button,.brand-select>button),#ppt-material-lab :is(.ml-button,.ml-label,.ml-card-name){font-size:var(--pm-body)}
+body[data-surface] :is(.effect-description,.control-help,.range-field output,.field small),#export-app :is(.heading p,#selection-help,.export-status span),#ppt-material-lab :is(.ml-help,.ml-card-meta){font-size:var(--pm-caption);color:var(--pm-muted);line-height:1.6}
+body[data-surface] :is(button,select,input),#ppt-material-lab :is(button,select,input),#export-app :is(button,select,input){font-family:inherit}
+/* Numeric specimens are artwork, with a distinct tabular figure face. */
+body[data-surface] .tile-glyph.is-numeric{position:absolute;inset:0;width:100%;height:100%;line-height:normal}
+body[data-surface] .effect-tile .mn-line{font-size:var(--pm-number-thumbnail-size)}
+body[data-surface] :is(.effect-tile[data-effect=number-count] .tile-glyph,.effect-tile[data-effect=number-roll] .tile-glyph,.mn-line){font-family:var(--pm-number-font),"DIN Alternate",Arial,sans-serif;font-weight:600;font-variant-numeric:tabular-nums lining-nums;font-feature-settings:"tnum";letter-spacing:0}
+/* One segmented-control component in both editors and preset dialogs. */
+body[data-surface] .mode-tabs,#ppt-material-lab :is(.ml-modes,.ml-library-types){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));height:var(--pm-segment-height);min-height:var(--pm-segment-height);padding:3px;gap:4px;border:0;border-radius:10px;background:var(--pm-surface);box-sizing:border-box;--ml-segment-gap:4px}
+body[data-surface] .mode-tabs button,#ppt-material-lab :is(.ml-modes,.ml-library-types) button{height:32px;min-height:0;min-width:0;padding:0 8px;margin:0;border:0;border-radius:var(--pm-radius);font-size:var(--pm-body);font-weight:400;line-height:1.4;color:var(--pm-secondary);white-space:nowrap;background:transparent;box-shadow:none;transition:color 170ms,background 170ms,box-shadow 170ms}
+#ppt-material-lab :is(.ml-modes,.ml-library-types)::before{display:none}
+body[data-surface] .mode-tabs button[aria-selected=true],body[data-surface] .mode-tabs button.active,#ppt-material-lab :is(.ml-modes,.ml-library-types) button[aria-pressed=true],#ppt-material-lab :is(.ml-modes,.ml-library-types) button[aria-selected=true]{color:var(--pm-accent);background:var(--pm-paper);box-shadow:0 1px 4px #25170c12,inset 0 0 0 1px var(--pm-line);font-weight:500}
+/* All scrolling surfaces: a 10px hit area, 4px visible thumb, no arrows. */
+:is(#ppt-material-lab,#export-app,body[data-surface]) *{scrollbar-width:auto;scrollbar-color:auto}
+:is(#ppt-material-lab,#export-app,body[data-surface]) *::-webkit-scrollbar{width:10px;height:10px}
+:is(#ppt-material-lab,#export-app,body[data-surface]) *::-webkit-scrollbar-track{background:transparent}
+:is(#ppt-material-lab,#export-app,body[data-surface]) *::-webkit-scrollbar-thumb{background:var(--pm-scroll);border:3px solid transparent;background-clip:padding-box;border-radius:10px;min-height:28px}
+:is(#ppt-material-lab,#export-app,body[data-surface]) *::-webkit-scrollbar-thumb:hover{background-color:var(--pm-scroll-hover)}
+:is(#ppt-material-lab,#export-app,body[data-surface]) *::-webkit-scrollbar-thumb:active{background-color:var(--pm-scroll-active)}
+:is(#ppt-material-lab,#export-app,body[data-surface]) *::-webkit-scrollbar-button{display:none;width:0;height:0}
+:is(#ppt-material-lab,#export-app,body[data-surface]) *::-webkit-scrollbar-corner{background:transparent}
+:is(body[data-surface],#ppt-material-lab,#export-app) input[type=range]{appearance:none;background:transparent;height:24px;cursor:pointer}
+:is(body[data-surface],#ppt-material-lab,#export-app) input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--pm-line);border-radius:4px}
+:is(body[data-surface],#ppt-material-lab,#export-app) input[type=range]::-webkit-slider-thumb{appearance:none;width:12px;height:12px;margin-top:-4px;border-radius:50%;border:2px solid var(--pm-paper);background:var(--pm-muted);box-shadow:0 0 0 1px var(--pm-muted)}
+body[data-surface] input[type=range]:focus-visible,#ppt-material-lab input[type=range]:focus-visible{outline:2px solid var(--pm-accent);outline-offset:2px}
+body[data-surface] .apply-controls :is(.brand-select>button,.primary){min-height:var(--pm-control-height);border-radius:var(--pm-radius)}
+body[data-surface=sidebar] .apply-controls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.22fr);gap:6px;flex-wrap:nowrap}
+body[data-surface=sidebar] .apply-controls :is(.replace-field,.trigger-field,.primary){width:100%;min-width:0;max-width:none;margin:0}
+body[data-surface=sidebar] .apply-controls :is(.brand-select>button,.primary){padding:6px;font-size:var(--pm-caption);white-space:nowrap;gap:4px}
+/* Preserve two columns at Office's narrow logical viewport (e.g. 320px at 150% DPI). */
+#ppt-material-lab:is([data-panel-mode=docked],[data-stacked=true]) .ml-library-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media(max-width:420px){
+ #ppt-material-lab .ml-library-dialog{width:calc(100% - 16px);padding:12px}
+ #ppt-material-lab .ml-library-card{padding:5px;border-radius:8px}
+ #ppt-material-lab .ml-card-bottom{display:flex;flex-wrap:wrap;gap:2px}
+ #ppt-material-lab .ml-card-name{flex:1 1 100%;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:var(--pm-caption)}
+ #ppt-material-lab .ml-card-bottom .ml-actions{margin-left:auto}
+ #ppt-material-lab .ml-library-card :is(.ml-panel-choice,.ml-library-more){width:26px;height:26px;min-width:26px;padding:3px}
+ #ppt-material-lab .ml-library-card button{font-size:var(--pm-caption)}
+}
+body[data-surface] .mode-tabs button[aria-pressed=true]{color:var(--pm-accent);background:var(--pm-paper);box-shadow:0 1px 4px #25170c12,inset 0 0 0 1px var(--pm-line);font-weight:500}
+#ppt-material-lab:is([data-panel-mode],[data-hosted],[data-stacked]) :is(.ml-modes,.ml-library-types) button{height:32px;min-height:32px;padding:0 8px;font-size:var(--pm-body);box-sizing:border-box}
+/* Both modules use PangToast and this single geometry/style definition. */
+:is(body[data-surface] #toast,#ppt-material-lab[data-hosted=true] #ml-status){position:fixed;top:112px;bottom:auto;left:50%;right:auto;display:block;width:max-content;max-width:min(440px,calc(100vw - 32px));height:auto;min-height:0;max-height:none;overflow:visible;box-sizing:border-box;margin:0;padding:12px 16px;border:1px solid #ffffff24;border-radius:var(--pm-radius);background:var(--pm-ink);color:#fff;font-family:var(--pm-font),"Segoe UI",sans-serif;font-size:var(--pm-body);font-weight:400;line-height:1.6;text-align:left;white-space:normal;overflow-wrap:anywhere;text-overflow:clip;box-shadow:0 8px 28px #302b2738;opacity:0;transform:translate(-50%,-8px);transition:opacity 170ms ease,transform 170ms ease;pointer-events:none;z-index:1000}
+:is(body[data-surface] #toast,#ppt-material-lab[data-hosted=true] #ml-status).visible{opacity:1;transform:translate(-50%,0)}
+:is(body[data-surface] #toast,#ppt-material-lab[data-hosted=true] #ml-status):empty{display:none}
+@media(prefers-reduced-motion:reduce){:is(body[data-surface] #toast,#ppt-material-lab[data-hosted=true] #ml-status){transition:none}}
+#ppt-material-lab .ml-quick-preset[aria-pressed=true]{border-color:transparent;background:transparent}
+#ppt-material-lab .ml-quick-preset canvas{object-fit:cover;border-radius:5px}
+#ppt-material-lab input[type=color]{width:var(--pm-color-swatch);height:var(--pm-color-swatch);flex-shrink:0}
+#ppt-material-lab .ml-card-bottom{flex-wrap:nowrap;gap:2px}
+#ppt-material-lab .ml-card-bottom .ml-card-name{flex:1 1 auto;font-size:var(--pm-library-label)}
+#ppt-material-lab .ml-card-bottom .ml-actions{gap:0;margin-left:auto}
+#ppt-material-lab .ml-card-bottom .ml-panel-choice{background:transparent;border-color:transparent}
+#ppt-material-lab .ml-library-card .ml-card-use{display:block;width:calc(100% - 12px);min-height:28px;margin:4px auto 0;padding:4px 8px;font-size:var(--pm-caption);line-height:18px}
+#ppt-material-lab .ml-library-card .ml-card-bottom{margin-top:4px}
+/* Compact name dialog, also reused by preset rename/copy. */
+#ppt-material-lab #ml-save-dialog{width:min(320px,calc(100vw - 28px));padding:20px;box-sizing:border-box;border-radius:12px}
+#ppt-material-lab #ml-save-form{display:flex;flex-direction:column;gap:16px}
+#ppt-material-lab #ml-save-dialog #ml-save-heading{margin:0;font-size:var(--pm-section);font-weight:600;line-height:1.5}
+#ppt-material-lab #ml-save-form .ml-field{margin:0;gap:6px}
+#ppt-material-lab #ml-save-form .ml-label{min-height:0;font-size:var(--pm-caption);line-height:16px;color:var(--pm-secondary)}
+#ppt-material-lab #ml-save-name{height:var(--pm-control-height);padding:6px 10px;border:1px solid var(--pm-line);border-radius:var(--pm-radius);font-size:var(--pm-body);background:var(--pm-surface);color:var(--pm-ink);box-sizing:border-box}
+#ppt-material-lab #ml-save-name:focus{outline:1px solid var(--pm-accent);outline-offset:2px;border-color:var(--pm-accent);box-shadow:none}
+#ppt-material-lab #ml-save-error{height:auto;min-height:0;margin:0;font-size:var(--pm-caption);line-height:1.5}
+#ppt-material-lab #ml-save-error:empty{display:none}
+#ppt-material-lab #ml-save-form>.ml-actions{justify-content:flex-end;gap:8px;margin:0;padding-top:0}
+#ppt-material-lab #ml-save-form>.ml-actions button{min-width:52px;min-height:var(--pm-control-height);padding:6px 10px;border-radius:var(--pm-radius);font-size:var(--pm-body)}
+#ppt-material-lab .ml-quick-preset[aria-pressed=true] canvas{outline:1px solid var(--pm-accent);outline-offset:2px}
+#ppt-material-lab .ml-quick-preset:focus-visible{outline:2px solid var(--pm-accent);outline-offset:2px}
+#ppt-material-lab:is([data-panel-mode=docked],[data-stacked=true]) .ml-quick-presets{height:auto;min-height:58px;gap:6px;align-items:start}
+#ppt-material-lab:is([data-panel-mode=docked],[data-stacked=true]) .ml-quick-preset{padding:3px 0;border:0;background:transparent;align-self:start}
+#ppt-material-lab:is([data-panel-mode=docked],[data-stacked=true]) .ml-quick-preset canvas{display:block;width:calc(100% - 6px);max-width:42px;height:34px;border-radius:5px}
+#ppt-material-lab:is([data-panel-mode=docked],[data-stacked=true]) .ml-quick-preset span{margin-top:6px;font-size:var(--pm-preset-label);line-height:12px;min-height:12px;white-space:nowrap;overflow:visible;text-overflow:clip;text-align:center}
+@media(prefers-reduced-motion:reduce){body[data-surface] .mode-tabs button,#ppt-material-lab :is(.ml-modes,.ml-library-types) button{transition:none}}
+
+/* Shared footer geometry and compact, secondary preview status. */
+body[data-surface] .preview-heading h2{font-size:var(--pm-effect-title)}
+body[data-surface] .apply-controls :is(.brand-select>button,.primary),#ppt-material-lab[data-hosted="true"] #ml-host-footer :is(#ml-host-restore,#ml-export-png,#ml-host-apply){box-sizing:border-box;height:var(--pm-footer-control-height);min-height:var(--pm-footer-control-height);max-height:var(--pm-footer-control-height)}
+#ppt-material-lab #ml-preview-loading{font-size:var(--pm-preview-hint);line-height:1.4;padding:4px 7px;border-radius:5px;max-width:calc(100% - 20px)}
+
+/* Direction choices share one button frame, including the draggable angle dial. */
+body[data-surface] .direction-control{display:grid;grid-template-columns:repeat(2,var(--pm-direction-size));grid-auto-rows:var(--pm-direction-size);gap:var(--pm-direction-gap);width:max-content;align-self:center}
+body[data-surface] .direction-pad{grid-template-columns:repeat(3,var(--pm-direction-size));grid-template-rows:repeat(3,var(--pm-direction-size))}
+body[data-surface] .direction-control button{display:grid;place-items:center;box-sizing:border-box;width:var(--pm-direction-size);height:var(--pm-direction-size);min-width:var(--pm-direction-size);min-height:var(--pm-direction-size);padding:0;margin:0;border:1px solid var(--pm-line);border-radius:var(--pm-radius);background:var(--pm-paper);color:var(--pm-muted);font-size:var(--pm-direction-icon);line-height:1;box-shadow:none;transition:border-color 140ms,background-color 140ms,color 140ms}
+body[data-surface] .direction-control button:hover{border-color:var(--pm-secondary);background:var(--pm-surface);color:var(--pm-ink)}
+body[data-surface] .direction-control button[aria-pressed=true]{border-color:var(--pm-accent);background:var(--pm-accent-soft);color:var(--pm-accent);box-shadow:inset 0 0 0 1px var(--pm-accent)}
+body[data-surface] .direction-control button:is(:focus,:focus-visible){outline:none;outline-offset:0;border-color:var(--pm-accent);box-shadow:inset 0 0 0 1px var(--pm-accent)}
+body[data-surface] .direction-control button:active{transform:none}
+body[data-surface] .direction-control svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.5}
+body[data-surface] .direction-control svg circle{fill:currentColor;stroke:var(--pm-paper);stroke-width:1}
+body[data-surface] .direction-custom-label{font-size:var(--pm-caption);font-weight:400;letter-spacing:0}
+@media(prefers-reduced-motion:reduce){body[data-surface] .direction-control button{transition:none}}
+
+/* Number entry and slider interaction shared by tool panels. */
+body[data-surface] .pm-number-field,#ppt-material-lab input.ml-number{box-sizing:border-box;width:var(--pm-parameter-width);min-width:var(--pm-parameter-width);height:var(--pm-parameter-height);min-height:var(--pm-parameter-height);margin:0;padding:3px 5px;border:1px solid transparent;border-radius:var(--pm-parameter-radius);background:var(--pm-surface);color:var(--pm-ink);font-family:inherit;font-size:var(--pm-body);font-weight:400;font-variant-numeric:tabular-nums;line-height:18px;text-align:right;outline:none;outline-offset:0;box-shadow:none;transition:border-color 170ms ease,box-shadow 170ms ease}
+body[data-surface] .pm-number-field{display:inline-flex;align-items:center;gap:4px;overflow:visible}
+body[data-surface] .pm-number-field input[type=number]{appearance:textfield;flex:1;box-sizing:border-box;width:0;min-width:0;height:100%;min-height:0;margin:0;padding:0;border:0;border-radius:0;background:transparent;text-align:right;font:inherit;color:inherit;box-shadow:none}
+body[data-surface] .pm-number-field input:is(:focus,:focus-visible){outline:none;outline-offset:0;box-shadow:none;background:transparent}
+body[data-surface] .pm-number-field>span{flex:none;padding:0;font-size:var(--pm-caption);line-height:18px;color:var(--pm-muted)}
+body[data-surface] .pm-number-field:focus-within,#ppt-material-lab input.ml-number:focus{outline:none;outline-offset:0;border-color:var(--pm-accent);background:var(--pm-surface);box-shadow:0 0 0 2px #ff55001c}
+body[data-surface] .pm-number-field input::-webkit-inner-spin-button,body[data-surface] .pm-number-field input::-webkit-outer-spin-button,#ppt-material-lab input.ml-number::-webkit-inner-spin-button{appearance:none;margin:0}
+@media(prefers-reduced-motion:reduce){body[data-surface] .pm-number-field,#ppt-material-lab input.ml-number{transition:none}}
+:is(body[data-surface],#ppt-material-lab,#export-app) input[type=range]::-webkit-slider-thumb{transition:box-shadow 180ms ease,background-color 180ms ease}
+:is(body[data-surface],#ppt-material-lab,#export-app) input[type=range]:is(:hover,:focus-visible)::-webkit-slider-thumb{background:var(--pm-accent);box-shadow:0 0 0 4px #ff55001c}
+:is(body[data-surface],#ppt-material-lab,#export-app) input[type=range]:active::-webkit-slider-thumb{background:var(--pm-accent);box-shadow:0 0 0 5px #ff55002b}
+@media(prefers-reduced-motion:reduce){:is(body[data-surface],#ppt-material-lab,#export-app) input[type=range]::-webkit-slider-thumb{transition:none}}
+
+/* A single moving plate: never fade a second selected background underneath it. */
+body[data-surface] .mode-tabs,#ppt-material-lab :is(.ml-modes,.ml-library-types){position:relative;isolation:isolate}
+body[data-surface] .mode-tabs::before,#ppt-material-lab :is(.ml-modes,.ml-library-types)::before{content:"";display:block;position:absolute;z-index:0;pointer-events:none;left:3px;top:3px;bottom:3px;width:calc((100% - 10px)/2);border-radius:var(--pm-radius);background:var(--pm-paper);box-shadow:0 1px 4px #25170c12,inset 0 0 0 1px var(--pm-line);transform:translateX(0);transition:transform 170ms cubic-bezier(.22,1,.36,1)}
+body[data-surface] .mode-tabs[data-selected=text]::before,#ppt-material-lab :is(.ml-modes,.ml-library-types)[data-selected=glass]::before{transform:translateX(calc(100% + 4px))}
+body[data-surface] .mode-tabs button,#ppt-material-lab :is(.ml-modes,.ml-library-types) button{position:relative;z-index:1;background:transparent!important;box-shadow:none!important;transition:color 170ms ease}
+body[data-surface] .mode-tabs button:focus,#ppt-material-lab :is(.ml-modes,.ml-library-types) button:focus{outline:none}
+body[data-surface] .mode-tabs button:focus-visible,#ppt-material-lab :is(.ml-modes,.ml-library-types) button:focus-visible{outline:1px solid var(--pm-accent);outline-offset:-2px}
+/* Matching bottom inset makes equal-height actions line up across docked panels. */
+body[data-surface=sidebar] .apply-panel,#ppt-material-lab[data-hosted=true]:is([data-panel-mode=docked],[data-stacked=true]) #ml-host-footer{padding:12px 14px;margin:0;border-top:1px solid var(--pm-line);box-sizing:border-box;align-items:center}
+body[data-surface] #apply-animation,#ppt-material-lab[data-hosted=true] #ml-host-footer #ml-host-apply{height:var(--pm-footer-control-height);min-height:var(--pm-footer-control-height);max-height:var(--pm-footer-control-height);box-sizing:border-box;line-height:1.4;padding-block:0;display:inline-flex;align-items:center;justify-content:center}
+@media(prefers-reduced-motion:reduce){body[data-surface] .mode-tabs::before,#ppt-material-lab :is(.ml-modes,.ml-library-types)::before{transition:none}}
+
+html[data-material-hosted=true][data-panel-mode=docked] body{padding-bottom:0}
