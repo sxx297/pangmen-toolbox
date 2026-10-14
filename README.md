@@ -4,15 +4,13 @@
 <p align="center">形状效果 · 元素与文本动画 · 图片型 PDF 导出</p>
 <p align="center">
 <a href="https://github.com/sxx297/pangmen-toolbox/releases/latest"><strong>下载安装包</strong></a> ·
-<a href="https://github.com/sxx297/pangmen-toolbox/releases/download/v1.0.11/pangmen-toolbox-examples.pptx">下载示例 PPT</a> ·
+<a href="#先看效果">效果展示</a> ·
 <a href="docs/USER_GUIDE.md">使用指南</a> ·
 <a href="https://github.com/sxx297/pangmen-toolbox/issues">反馈问题</a>
 </p>
 <p align="center"><sub>Windows 桌面版 PowerPoint · v1.0.11 · GPL-3.0-only 开源</sub></p>
 
 ---
-
-> **下载状态：** 安装包与示例 PPT 正在发布准备中，下载链接暂未开放。源码与下方案例可先查看。
 
 ## 先看效果
 
@@ -32,7 +30,7 @@
 
 **怎么做：** 选中单个数字文本框 → 文本动画 / 进入 → 数值滚动。本例使用 **128,640**，时长 **2.4 秒**，数据仅作演示。
 
-> 上述动图由插件原生执行逻辑生成，再由 Microsoft PowerPoint 导出视频、转换为 GIF，未用浏览器动画替代。GIF 为循环展示；示例 PPT 中是单次进入动画。
+> 上述动图由插件原生执行逻辑生成，再由 Microsoft PowerPoint 导出视频、转换为 GIF。GIF 为循环展示，原生进入动画为单次播放。
 
 ### 弥散渐变：给卡片和数据页增加层次
 
@@ -40,7 +38,7 @@
 
 <p align="center"><img src="docs/media/gradient.png" width="960" alt="PowerPoint 案例：功能介绍、成果汇报和章节过渡三种渐变卡片"></p>
 
-**适用场景：** 功能介绍卡片、关键指标、产品介绍和章节过渡。示例文字为独立 PowerPoint 文本，可继续编辑。
+**适用场景：** 功能介绍卡片、关键指标、产品介绍和章节过渡。制作时可将文字与材质分开，保留文字编辑能力。
 
 ### 液态玻璃：让信息浮在背景之上
 
@@ -50,7 +48,7 @@
 
 **适用场景：** 信息浮层、项目概览、图片上的说明与封面信息区。玻璃效果依赖背景，背景变化后可点击“刷新背景”重新生成。
 
-<sub>形状案例使用插件实际材质渲染器生成，再放入 PowerPoint 排版并导出；展示图为幻灯片输出，不是桌面界面截图。示例 PPT 中的材质为渲染图像，文字保持独立编辑。</sub>
+<sub>形状案例使用插件实际材质渲染器生成，再放入 PowerPoint 排版并导出；展示图为幻灯片输出，不是桌面界面截图。案例以图片和 GIF 展示。</sub>
 
 ## 能做什么
 
@@ -85,11 +83,7 @@
 
 **环境要求：** Windows 桌面版 Microsoft PowerPoint、.NET Framework 4.8、Microsoft Edge WebView2 Runtime。安装器自动检测 Office 位数；当前主要实测环境为 **64 位 Office**。
 
-### 2. 打开示例，直接试用
-
-[下载四页示例 PPT](https://github.com/sxx297/pangmen-toolbox/releases/download/v1.0.11/pangmen-toolbox-examples.pptx)：包含轰然坠落、数字滚动、弥散渐变、液态玻璃。前两页可直接放映；后两页展示材质组合与可编辑文字。示例用途和生成方法见 [案例说明](examples/README.md)。
-
-### 3. 应用到自己的内容
+### 2. 应用到自己的内容
 
 - **动画：** 选中对象，选择卡片，调整有效参数；按需要选择“替换动画 / 保留动画”和“单击时 / 同时开始 / 之后开始”。使用底栏按钮在 PowerPoint 中预览，修改后可更新。
 - **形状：** 选中支持的形状，打开形状效果，选择预设并微调，点击“应用到选中形状”。想撤回材质时使用“恢复原样”。
